@@ -10,7 +10,6 @@
 	* polynomial.c : module source file
 
 ## Structures
-
 	
 ~~~~
 typedef struct
@@ -27,6 +26,7 @@ typedef struct
 	struct n *next;
 } polyNode;	
 ~~~~
+
 	
 ~~~~
 typedef struct
@@ -35,3 +35,19 @@ typedef struct
 	int order;
 } polyData;	
 ~~~~
+
+## Pseudo code
+
+int create(address of polylist, order of poly, array of coefficients)
+{
+  
+}
+int addNode()
+delete
+add
+subtract
+multiply
+divide
+normalise
+order
+print
