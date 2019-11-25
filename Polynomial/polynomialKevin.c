@@ -1,19 +1,34 @@
-// Author: kevin mcandrew
-// create and delete functions
+///////////////////////////////////////////////////////
+// polynomialKevin.c
+// implementation of create and delete operation for a 
+// polynomial structure
+//
+// author:	kevin mcandrew
+// date:	25.11.2019
+///////////////////////////////////////////////////////
 
-#include <stdio.h>
-#include <stdlib.h>
+/*#include <stdio.h>
+#include <stdlib.h>*/
 #include "polynomial.h"
 
-int main()
+/*int main()
 {
     double arr[] = {5, 0, 1};
     polyList *poly1 = create();
     fillPoly(poly1, 2, arr);
     printf("%lf", poly1->current->d.coefficient);
-}
+}*/
 
-polyList *create()
+///////////////////////////////////////////////////////
+// polyCreate()
+// Creates an empty polynomial, head points to tail and
+// has no coefficients.
+// Use fillPoly() or newCoeff() to add new coefficients
+// 
+// return: pointer to polynomial if successful
+//         NULL if unsuccessful
+///////////////////////////////////////////////////////
+polyList *polyCreate()
 {
     polyList *poly;
     poly = (polyList *) malloc(sizeof(polyList));
@@ -39,6 +54,16 @@ polyList *create()
     return poly;
 }
 
+///////////////////////////////////////////////////////
+// fillPoly(poly, order, arr[])
+// Fills an empty polynomial of with a certain order,
+// with the coefficients in arr[]
+//
+// parameter:  poly - the empty polynomial to fill
+//             order - the order of the polynomial
+//             arr - the array of coefficients 
+// return: pointer to polynomial if successful
+///////////////////////////////////////////////////////
 int fillPoly(polyList *poly, int order, double arr[])
 {
     // Assign head coefficient first
@@ -57,6 +82,15 @@ int fillPoly(polyList *poly, int order, double arr[])
     return 0;
 }
 
+///////////////////////////////////////////////////////
+// newCoeff(coefficient, order)
+// Creates and returns a new polyNode to be added to
+// the next node of the previous node.
+//
+// parameter:  coefficient - the value of the coefficient
+//             order - the order of the coefficient
+// return: pointer to polynomial if successful
+///////////////////////////////////////////////////////
 polyNode *newCoeff(double coefficient, int order)
 {
     // Allocate memory for new node
