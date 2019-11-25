@@ -17,7 +17,7 @@ typedef struct
 {
   	polyData d;
   	struct n *next
-} 	polyNode;
+} polyNode;
 
 typedef struct
 {
