@@ -26,8 +26,8 @@ polyList multiply(polyList *poly, double multiplyer)
 //uses a for loop to move through the link list and divide each coefficient by a double value
 polyList divide(polyList *poly, double divider)
 {
-	polyList polyDiv;
-	int ord = order(poly);
+	polyList polyDiv; //creates a new polynomial to use for division
+	int ord = order(poly); //int ord is assigned the value of the order of the polynomial
 	for(int i = 0; i <= ord; i++)
 	{	
 		//value of current coefficient is divided by the double and stored in the new 			polynomial
