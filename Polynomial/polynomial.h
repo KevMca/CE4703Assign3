@@ -27,7 +27,7 @@ typedef struct
 
 
 
-int create(polyList *poly1, order, double array()); //creates a polynomial
+polyList *create(polyList *poly1, order, double array()); //creates a polynomial
 
 int addNode(); //adds a node to a polynomial
 

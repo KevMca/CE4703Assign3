@@ -7,28 +7,33 @@
 #include <stdio.h>
 #include "polynomial.h"
 
+
+//uses a for loop to move through the link list and multiply each coefficient by a double value
 polyList multiply(polyList *poly, double multiplyer)
 {
-	polyList polyMul;
-	int ord = order(&poly);
+	polyList polyMul; //creates a new polynomial to use for multiplication
+	int ord = order(poly); //int ord is assigned the value of the order of the polynomial
 	for(int i = 0; i <= ord; i++)
-	{
+	{	
+		//value of current coefficient is multiped by the double and stored in the new 			polynomial
 		polyMul.current->d.coefficient = *poly->current->d.coefficient*multiplyer;
 		addNode(...);
-		polyMul.current = polyMul.current->next;
+		polyMul.current = polyMul.current->next; //moves the current to the next coefficient  
 	}
-	return polyMul;
+	return polyMul; //returns the multipied polynomial
 }
 
+//uses a for loop to move through the link list and divide each coefficient by a double value
 polyList divide(polyList *poly, double divider)
 {
 	polyList polyDiv;
-	int ord = order(&poly);
+	int ord = order(poly);
 	for(int i = 0; i <= ord; i++)
-	{
+	{	
+		//value of current coefficient is divided by the double and stored in the new 			polynomial
 		polyDiv.current->d.coefficient = *poly->current->d.coefficient/divider;
 		addNode(...);
-		polyDiv.current = polyDiv.current->next;
+		polyDiv.current = polyDiv.current->next; //moves the current to the next coefficient
 	}
-	return poly3;
+	return polyDiv; //returns the divided polynomial 
 }
