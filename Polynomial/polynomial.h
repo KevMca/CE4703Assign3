@@ -26,6 +26,7 @@ typedef struct
   	int order; //order of the coefficient
 } polyList;
 
+
 polyList *create(int order, double arr[]); //creates a polynomial
 polyNode *addCoeff(double coefficient, polyNode *current); //adds a node to a polynomial
 int deleteNode(); //deletes a polynomial
