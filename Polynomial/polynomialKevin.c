@@ -67,8 +67,9 @@ polyList *polyCreate()
 int fillPoly(polyList *poly, int order, double arr[])
 {
     // Assign head coefficient first
-    poly->head->d.coefficient = arr[0];
-    poly->head->d.order = 0;
+    poly->current = poly->head;
+    poly->current->d.coefficient = arr[0];
+    poly->current->d.order = 0;
 
     // Assign the rest of the coefficients
     for(int i = 1; i <= order; i++)
@@ -89,7 +90,7 @@ int fillPoly(polyList *poly, int order, double arr[])
 //
 // parameter:  coefficient - the value of the coefficient
 //             order - the order of the coefficient
-// return: pointer to polynomial if successful
+// return: pointer to new node, if successful
 ///////////////////////////////////////////////////////
 polyNode *newCoeff(double coefficient, int order)
 {
@@ -110,7 +111,44 @@ polyNode *newCoeff(double coefficient, int order)
     return new_node;
 }
 
-int delete()
+///////////////////////////////////////////////////////
+// polyDelete(poly)
+// Deletes and frees up memory from a polynomial
+//
+// parameter:  poly - the polynomial to delete
+// return: returns 0 if successful
+///////////////////////////////////////////////////////
+int polyDelete(polyList *poly)
 {
+    // Reset
+    poly->current = poly->head;
+
+    // While there is a next node, delete current node
+    while(poly->head->next != NULL)
+        deleteCoeff(poly->head->next);
+    
+    // Polynomial is empty, so head and polynomial need to
+    // be freed
+    free(poly->head);
+    free(poly);
+    return 0;
+}
+
+///////////////////////////////////////////////////////
+// deleteCoeff(toDelete)
+// Deletes and frees up memory for a particular node
+//
+// parameter:  toDelete - the coefficient node to delete
+// return: returns 0 if successful
+///////////////////////////////////////////////////////
+int deleteCoeff(polyNode *toDelete)
+{
+    // Save address of toDelete so that it can be deleted
+    polyNode *node = toDelete;
+    
+    // Remove the coefficient from the polynomial
+    toDelete = toDelete->next;
+    free(node);
+
     return 0;
 }
