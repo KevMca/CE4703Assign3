@@ -7,8 +7,7 @@ void print(polyList *poly1)
     {
       
       printf("%lf x^%d +",(poly1->current->d.coefficient),i); // prints coefficient polynominal starting at least significant
-      
-      *poly1->current->next;
+     
       current = poly1->current->next; // sets current to next number 
     }
   
