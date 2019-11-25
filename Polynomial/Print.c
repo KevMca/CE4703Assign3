@@ -2,15 +2,15 @@
 
 void print(polyList *poly1)
 {
-  
-  for(int i=0; i < (poly1->order); i ++)
+  int order = order(poly1); // get highest order that coefficient isn't 1
+  for(int i=0; i < order; i ++) // for loop from 0 to highest order
     {
       
-      printf("%lf x^%d +",(poly1->current->d.coefficient),i);
+      printf("%lf x^%d +",(poly1->current->d.coefficient),i); // prints coefficient polynominal starting at least significant
       
       *poly1->current->next;
-      current = poly1->current->next;
+      current = poly1->current->next; // sets current to next number 
     }
   
-  printf("%lf", (poly1->order));
+  printf("%lf", (poly1->order)); // prints morst signicant of polynominal
 }
