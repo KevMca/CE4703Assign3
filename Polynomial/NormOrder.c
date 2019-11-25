@@ -1,7 +1,15 @@
-polyList normalise(polyList poly1){
+polyList normalise(polyList *poly1){
   polyList norm;
   double highCoeff;
-  highCoeff = order(poly1);
+  int order;
+  order = order(poly1);
+  for(int i =0; i < order; i++)
+    {
+      *poly1->current->next;
+      current = poly1->current->next;
+    }
+
+  highCoeff = poly1->current->d.coefficient; 
   norm =  polyList divide(poly1, highCoeff);
   return norm;
 }
