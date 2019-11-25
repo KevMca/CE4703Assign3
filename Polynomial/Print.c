@@ -12,5 +12,5 @@ void print(polyList *poly1)
       current = poly1->current->next; // sets current to next number 
     }
   
-  printf("%lf", (poly1->order)); // prints morst signicant of polynominal
+  printf("%lf", (poly1->order)); // prints most signicant of polynominal
 }

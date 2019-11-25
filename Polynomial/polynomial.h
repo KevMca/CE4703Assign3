@@ -33,8 +33,8 @@ polyNode *newCoeff(double coefficient, int order); //adds a node to a polynomial
 int deleteNode(); //deletes a polynomial
 polyList add(polyList *poly1, polyList *poly2); //adds two polynomials together
 polyList subtract(polyList *poly1, polyList *poly2); //subtracts 2 polynomials
-polyList multiply(polyList *poly1, polyList *poly2); //multiplies 2 polynomials
-polyList divide(polyList *poly1, polyList poly2); //divides 2 polynomials
+polyList multiply(polyList *poly1); //multiplies a polynomial by a double
+polyList divide(polyList *poly1); //divides a polynomial by a double
 polyList normalise(polyList *poly1); //normalises a polynomial
 int order(polyList *poly1); //returns the highest order of the polynomial 
 void print(polyList *poly1); //prints out the polynomial to stdout
