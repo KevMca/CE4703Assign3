@@ -33,8 +33,10 @@ polyList *polyCreate();
 int fillPoly(polyList *poly, int order, double arr[]);
 // Adds a coefficient to a polynomial
 polyNode *newCoeff(double coefficient, int order);
+// Deletes a polynomial
+int polyDelete(polyList *poly);
 // Deletes a polynomial coefficient
-int deleteCoeff(polyNode *toDelete);
+int deleteNext(polyNode *current);
 
 // Polynomial operations
 // Adds two polynomials together

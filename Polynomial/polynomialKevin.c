@@ -6,17 +6,22 @@
 // author:	kevin mcandrew
 // date:	25.11.2019
 ///////////////////////////////////////////////////////
-
-/*#include <stdio.h>
+/*
+#include <stdio.h>
 #include <stdlib.h>*/
 #include "polynomial.h"
-
-/*int main()
+/*
+int main()
 {
     double arr[] = {5, 0, 1};
-    polyList *poly1 = create();
+    polyList *poly1 = polyCreate();
     fillPoly(poly1, 2, arr);
-    printf("%lf", poly1->current->d.coefficient);
+    printf("%d %lf\n", poly1->current->d.order, poly1->current->d.coefficient);
+    poly1->current = poly1->current->next;
+    printf("%d %lf\n", poly1->current->d.order, poly1->current->d.coefficient);
+    poly1->current = poly1->current->next;
+    printf("%d %lf\n", poly1->current->d.order, poly1->current->d.coefficient);
+    polyDelete(poly1);
 }*/
 
 ///////////////////////////////////////////////////////
@@ -104,7 +109,7 @@ polyNode *newCoeff(double coefficient, int order)
 
     // Assign attributes
     new_node->d.coefficient = coefficient;
-    new_node->d.coefficient = order;
+    new_node->d.order = order;
     new_node->next = NULL;
  
     // Link new node to current node
@@ -125,8 +130,12 @@ int polyDelete(polyList *poly)
 
     // While there is a next node, delete current node
     while(poly->head->next != NULL)
-        deleteCoeff(poly->head->next);
-    
+    {
+        printf("next = %d\n", poly->head->next);
+        printf("order: %d\n", poly->head->next->d.order);
+        deleteNext(poly->current);
+    }
+
     // Polynomial is empty, so head and polynomial need to
     // be freed
     free(poly->head);
@@ -135,20 +144,26 @@ int polyDelete(polyList *poly)
 }
 
 ///////////////////////////////////////////////////////
-// deleteCoeff(toDelete)
-// Deletes and frees up memory for a particular node
+// deleteNext(current)
+// Deletes and frees up memory for the next node after
+// the current node specified
 //
 // parameter:  toDelete - the coefficient node to delete
 // return: returns 0 if successful
 ///////////////////////////////////////////////////////
-int deleteCoeff(polyNode *toDelete)
+int deleteNext(polyNode *current)
 {
-    // Save address of toDelete so that it can be deleted
-    polyNode *node = toDelete;
-    
-    // Remove the coefficient from the polynomial
-    toDelete = toDelete->next;
-    free(node);
-
-    return 0;
+    polyNode *toDelete;
+    if (current->next == NULL) {
+        // Next is tail => cannot remove node
+        return -1;
+    } else {
+        // 1. Keep pointer to node to be deleted
+        toDelete = current->next;
+        // 2. Set successor of current to successor of node to be deleted
+        current->next = toDelete->next;
+        // 3. Delete node from memory
+        free(toDelete);
+  }
+  return 0;
 }
