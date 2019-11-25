@@ -8,20 +8,34 @@
 
 typedef struct
 {
-  polyNode *head;
-  polyNode *current;
-  int order;
+  	polyNode *head;
+  	polyNode *current;
+  	int order;
 } polyList;
 
 typedef struct
 {
-  polyData d;
-  struct n *next
-} polyNode;
+  	polyData d;
+  	struct n *next
+} 	polyNode;
 
 typedef struct
 {
-  
-}
+  	double coefficient;
+	int order;
+} polyData;
+
+int create()
+int addNode()
+int deleteNode()
+polyList add(polyList poly1, polyList poly2)
+polyList subtract()
+polyList multiply()
+polyList divide()
+polyList normalise()
+int order()
+void print(polyList)
+
+
 
 #endif
