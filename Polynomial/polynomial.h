@@ -27,8 +27,9 @@ typedef struct
 } polyList;
 
 
-polyList *create(int order, double arr[]); //creates a polynomial
-polyNode *addCoeff(double coefficient, polyNode *current); //adds a node to a polynomial
+polyList *create(); //creates a polynomial
+int fillPoly(polyList *poly, int order, double arr[]);
+polyNode *newCoeff(double coefficient, int order); //adds a node to a polynomial
 int deleteNode(); //deletes a polynomial
 polyList add(polyList *poly1, polyList *poly2); //adds two polynomials together
 polyList subtract(polyList *poly1, polyList *poly2); //subtracts 2 polynomials
