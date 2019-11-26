@@ -39,10 +39,11 @@ int main()
 polyList *polyAdd(polyList *poly1, polyList *poly2){
   polyList *poly3; // declares a polynomial
   poly3 = polyCreate(); // creates an empty polynomial
-  int smallOrd, bigOrd;
+  int smallOrd, bigOrd, whichOrd;
   // checks which polynomial has a higher order
   // assigns variables for each order
   if(polyOrder(poly1) > polyOrder(poly2)){
+    whichOrd = 1;
     smallOrd = polyOrder(poly2);
     bigOrd = polyOrder(poly1);
   }
@@ -66,7 +67,7 @@ polyList *polyAdd(polyList *poly1, polyList *poly2){
   }
 
   // checks which polynomial has the higher order then assigns the rest of its terms to poly3
-  if(polyOrder(poly1) > polyOrder(poly2)){
+  if(whichOrd == 1){
     for(int i = smallOrd + 1; i < bigOrd; i++){
       poly3->current->d.coefficient = poly1->current->d.coefficient;
       poly1->current = poly1->current->next;
@@ -103,10 +104,11 @@ polyList *polyAdd(polyList *poly1, polyList *poly2){
  */
 polyList *polySubtract(polyList *poly1, polyList *poly2){
   polyList *poly3;
-  poly3 = polyCreate(); // se
-  int smallOrd, bigOrd;
+  poly3 = polyCreate(); // creates an empty polynomial
+  int smallOrd, bigOrd, whichOrd;
   // checks which polynomial has the higher order
   if(polyOrder(poly1) > polyOrder(poly2)){
+    whichOrd = 1;
     smallOrd = polyOrder(poly2);
     bigOrd = polyOrder(poly1);
   }
@@ -127,7 +129,7 @@ polyList *polySubtract(polyList *poly1, polyList *poly2){
   // checks which polynomial has the higher order
   // if the minuend has a higher order, its remaining elements are assigned to poly3
   // if the subtrahend has a higher order, the inverse of its remaining elements are assigned to poly3
-  if(polyOrder(poly1) > polyOrder(poly2)){
+  if(whichOrd == 1){
     for(int i = smallOrd + 1; i < bigOrd; i++){
       poly3->current->d.coefficient = poly1->current->d.coefficient;
       poly1->current = poly1->current->next;
