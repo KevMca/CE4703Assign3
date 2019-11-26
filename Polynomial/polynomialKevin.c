@@ -6,9 +6,9 @@
 // author:	kevin mcandrew
 // date:	25.11.2019
 ///////////////////////////////////////////////////////
-/*
+
 #include <stdio.h>
-#include <stdlib.h>*/
+#include <stdlib.h>
 #include "polynomial.h"
 /*
 int main()
@@ -71,6 +71,9 @@ polyList *polyCreate()
 ///////////////////////////////////////////////////////
 int fillPoly(polyList *poly, int order, double arr[])
 {
+    // Fill polyList parameters
+    poly->order = order;
+    
     // Assign head coefficient first
     poly->current = poly->head;
     poly->current->d.coefficient = arr[0];
@@ -131,8 +134,6 @@ int polyDelete(polyList *poly)
     // While there is a next node, delete current node
     while(poly->head->next != NULL)
     {
-        printf("next = %d\n", poly->head->next);
-        printf("order: %d\n", poly->head->next->d.order);
         deleteNext(poly->current);
     }
 
