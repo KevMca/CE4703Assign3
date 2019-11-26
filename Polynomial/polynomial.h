@@ -52,6 +52,6 @@ polyList *polyNormalise(polyList *poly1);
 // Returns the highest order of the polynomial
 int polyOrder(polyList *poly1);
 // Prints out the polynomial to stdout 
-void print(polyList *poly1);
+void polyPrint(polyList *poly1);
 
 #endif
