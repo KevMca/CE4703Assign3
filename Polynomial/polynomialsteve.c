@@ -3,11 +3,11 @@
 //date: 25/11/19
 //purpose: multiply and divde functions
 
-#include <stdlib.h>
-#include <stdio.h>
+//#include <stdlib.h>
+//#include <stdio.h>
 #include "polynomial.h"
 
-int main()
+/*int main()
 {
 	double arr[] = {6, 0, 2};
 	polyList *polyT;
@@ -16,7 +16,7 @@ int main()
 	polyList *polyM = multiply(polyT, 3);
 	polyList *polyD = divide(polyT, 2);
 	return 0;
-}
+}*/
 
 //uses a for loop to move through the link list and 
 //multiply each coefficient by a double value
@@ -24,7 +24,7 @@ polyList *multiply(polyList *poly, double multiplyer)
 {
 	polyList *polyMul; //creates a new polynomial to use for multiplication
 	polyMul = polyCreate();
-	int ord = order(poly); //int ord is assigned the value of the order of the polynomial
+	int ord = polyOrder(poly); //int ord is assigned the value of the order of the polynomial
 	//Assign head first
 	polyMul->current = polyMul->head;
 	polyMul->current->d.order = 0;
@@ -51,7 +51,7 @@ polyList *divide(polyList *poly, double divider)
 {
 	polyList *polyDiv; //creates a new polynomial to use for division
 	polyDiv = polyCreate();
-	int ord = order(poly); //int ord is assigned the value of the order of the polynomial
+	int ord = polyOrder(poly); //int ord is assigned the value of the order of the polynomial
 	//Assign head first
 	polyDiv->current = polyDiv->head;
 	polyDiv->current->d.order = 0;
