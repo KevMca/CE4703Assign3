@@ -1,0 +1,54 @@
+## Pseudo code
+
+
+int create(address of polylist, order of poly, array of coefficients)
+{
+    Create (order number + 1) of elements
+    For order:
+        addNode()
+}
+
+int addNode()
+{
+    malloc
+}
+
+delete(address of polylist){
+   For loop
+        deleteNode()
+}
+
+Int deleteNode()
+{
+    free
+}
+
+polyList add(polylist1, polylist2){
+	 If polylist1 >= polylist2
+	    Create polylist of size order+1
+	    For loop (for order of polylist 2)
+    	    	Add all elements for smaller polylist
+    	    For loop (for order of polylist 1 - polylist 2)
+    		Add all elements to 0 for overflow
+	Else 
+            create polylist of size order+1
+    	    For loop (for order of polylist 1)
+    	    	Add all elements for smaller polylist
+            For loop (for order of polylist 2 - polylist 1)
+    	    	Add all elements to 0 for overflow
+}
+
+polyList subtract(polylist1, polylist2){
+	 If polylist1 >= polylist2
+            Create polylist of size order+1
+	    For loop (for order of polylist 2)
+    	    	subtract all elements for smaller polylist
+	     For loop (for order of polylist 1 - polylist 2)
+    	     	Make all terms negative
+	 Else 
+             Create polylist of size order+1
+	     For loop (for order of polylist 1)
+    	     	 subtract all elements for smaller polylist
+	     For loop (for order of polylist 2 - polylist 1)
+    	         Leave all elements as they are
+
