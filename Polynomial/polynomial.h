@@ -40,9 +40,9 @@ int deleteNext(polyNode *current);
 
 // Polynomial operations
 // Adds two polynomials together
-polyList add(polyList *poly1, polyList *poly2);
+polyList *polyAdd(polyList *poly1, polyList *poly2);
 // Subtracts 2 polynomials
-polyList subtract(polyList *poly1, polyList *poly2);
+polyList *polySubtract(polyList *poly1, polyList *poly2);
 // Multiplies a polynomial by a doubles
 polyList *multiply(polyList *poly, double multiplyer);
 // Divides a polynomial by a double
@@ -52,6 +52,6 @@ polyList *polyNormalise(polyList *poly1);
 // Returns the highest order of the polynomial
 int polyOrder(polyList *poly1);
 // Prints out the polynomial to stdout 
-void print(polyList *poly1);
+void polyPrint(polyList *poly1);
 
 #endif
