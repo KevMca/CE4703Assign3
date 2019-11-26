@@ -17,5 +17,5 @@ void polyPrint(polyList *poly1)
       poly1->current = poly1->current->next; // sets current to next number 
     }
   
-  printf("%lf x^%d", (poly1->current->d.coofficient),power); // prints most signicant of polynominal
+  printf("%lf x^%d\n", (poly1->current->d.coofficient),power); // prints most signicant of polynominal
 }
