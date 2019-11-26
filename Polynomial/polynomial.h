@@ -48,9 +48,9 @@ polyList *multiply(polyList *poly, double multiplyer);
 // Divides a polynomial by a double
 polyList *divide(polyList *poly, double divider);
 // Normalises a polynomial
-polyList *normalise(polyList *poly1);
+polyList *polyNormalise(polyList *poly1);
 // Returns the highest order of the polynomial
-int order(polyList *poly1);
+int polyOrder(polyList *poly1);
 // Prints out the polynomial to stdout 
 void print(polyList *poly1);
 
