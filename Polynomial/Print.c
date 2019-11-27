@@ -12,11 +12,12 @@
   fillPoly(poly1, 3, arr);
   polyPrint(poly1);
 }*/
-
-// function Print: prints a polynomial
+///////////////////////////////////////////////////////
+// polyPrint(poly1)
+//  prints a polynomial to the user
 //
-// Parameters:
-// poly1: pointer to the polynomial
+// parameter:  poly - pointer to polynomial
+///////////////////////////////////////////////////////
 
 void polyPrint(polyList *poly1)
 {  
