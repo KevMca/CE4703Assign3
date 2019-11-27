@@ -48,7 +48,7 @@ int main()
   while(continueLoop)
     {
       int interfaceChoice;
-      printf("Please choose the number corresponding to the action you want\n1. Display all polynomials\n2. Create a polynomial\n3. Delete a polynomial\n4. Add two polynomials\n5. Subtract two polynomials\n6. Multiply a polynomial by a constant\n7. Divide a polynomial by a constant\n8. Normalise a polynomial\n 9.Return the order of a polynomial\n10. Close the application\n");
+      printf("Please choose the number corresponding to the action you want\n1. Display all polynomials\n2. Create a polynomial\n3. Delete a polynomial\n4. Add two polynomials\n5. Subtract two polynomials\n6. Multiply a polynomial by a constant\n7. Divide a polynomial by a constant\n8. Normalise a polynomial\n9. Return the order of a polynomial\n10. Close the application\n");
       scanf("%i", &interfaceChoice);
 
       switch(interfaceChoice)
@@ -82,9 +82,9 @@ int main()
 	  printf("Please select two polynomials to add together\n");
 	  polyPrintList(polyArray, polyArrayCounter);
 	  scanf("%d %d", &polyChoice1, &polyChoice2);
-	  polyArray[polyArrayCounter + 1] = polyAdd(polyArray[polyChoice1 - 1], polyArray[polyChoice2 - 1]);
-	  polyArrayCounter += 1;
+	  polyArray[polyArrayCounter] = polyAdd(polyArray[polyChoice1 - 1], polyArray[polyChoice2 - 1]);
 	  polyPrint(polyArray[polyArrayCounter]);
+	  polyArrayCounter += 1;
 	  break;
 	  
 	// subtracts 2 polynomials
@@ -92,9 +92,9 @@ int main()
 	  printf("Please select a polynomial to subract from another\n");
 	  polyPrintList(polyArray, polyArrayCounter);
 	  scanf("%d %d", &polyChoice1, &polyChoice2);
-	  polyArray[polyArrayCounter + 1] = polyAdd(polyArray[polyChoice1 - 1], polyArray[polyChoice2 - 1]);
-	  polyArrayCounter += 1;
+	  polyArray[polyArrayCounter] = polyAdd(polyArray[polyChoice1 - 1], polyArray[polyChoice2 - 1]);
 	  polyPrint(polyArray[polyArrayCounter]);
+	  polyArrayCounter += 1;
 	  break;
 	  
 	// multiplies a polynomial by a constant
@@ -102,9 +102,9 @@ int main()
 	  printf("Please select a polynomial and a constant to multiply together\n");
 	  polyPrintList(polyArray, polyArrayCounter);
 	  scanf("%d %lf", &polyChoice1, &constant);
-	  polyArray[polyArrayCounter + 1] = multiply(polyArray[polyChoice1 - 1], constant);
-	  polyArrayCounter += 1;
+	  polyArray[polyArrayCounter] = multiply(polyArray[polyChoice1 - 1], constant);
 	  polyPrint(polyArray[polyArrayCounter]);
+	  polyArrayCounter += 1;
 	  break;
 	  
 	// divides a polynomial by a constant
@@ -112,18 +112,18 @@ int main()
 	  printf("Please select a polynomial and a constant to divide from it\n");
 	  polyPrintList(polyArray, polyArrayCounter);
 	  scanf("%d %lf", &polyChoice1, &constant);
-	  polyArray[polyArrayCounter + 1] = divide(polyArray[polyChoice1 - 1], constant);
-	  polyArrayCounter += 1;
+	  polyArray[polyArrayCounter] = divide(polyArray[polyChoice1 - 1], constant);
 	  polyPrint(polyArray[polyArrayCounter]);
+	  polyArrayCounter += 1;
 	  break;
 	// normalise a polynomial
 	case 8:
 	  printf("Please select a polynomial to normalise\n");
 	  polyPrintList(polyArray, polyArrayCounter);
 	  scanf("%d", &polyChoice1);
-	  polyArray[polyArrayCounter + 1] = polyNormalise(polyArray[polyChoice1 - 1]);
-	  polyArrayCounter += 1;
+	  polyArray[polyArrayCounter] = polyNormalise(polyArray[polyChoice1 - 1]);
 	  polyPrint(polyArray[polyArrayCounter]);
+	  polyArrayCounter += 1;
 	  break;
 	  
 	// return order of polynomial
