@@ -32,7 +32,6 @@ void polyPrintList(polyList *polyArray[], int polyArrayCounter)
   {
     printf("%d. ", i+1);
     polyPrint(polyArray[i]);
-    printf("\n");
   }
 }
 
