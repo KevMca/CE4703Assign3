@@ -3,8 +3,11 @@
 //date: 25/11/19
 //purpose: To declare all functions and data structures
 
-#ifndef HEADER_FILEPOLY
-#define HEADER_FILEPOLY
+#include <stdlib.h>
+#include <stdio.h> 
+
+#ifndef POLYNOMIAL_H
+#define POLYNOMIAL_H
 
 typedef struct
 {
