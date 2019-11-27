@@ -168,6 +168,6 @@ int deleteNext(polyNode *current)
         current->next = toDelete->next;
         // 3. Delete node from memory
         free(toDelete);
-  }
-  return 0;
+    }
+    return 0;
 }
