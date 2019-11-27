@@ -166,7 +166,6 @@ polyList *polyAdd(polyList *poly1, polyList *poly2)
       poly3->current = poly3->current->next;
     }
     poly3->current->d.coefficient = poly2->current->d.coefficient;
-    printf("%lf\n", poly2->current->d.order);
   }
 
   // reset current cursor to head
@@ -320,14 +319,14 @@ void polyPrint(polyList *poly1)
 {  
   int order = polyOrder(poly1); // get highest order that coefficient isn't 0
   poly1->current = poly1->head; // set current to first element
-  fprintf( stdout, "%lf", (poly1->current->d.coefficient)); // prints first element
+  fprintf(stdout, "%lf", (poly1->current->d.coefficient)); // prints first element
   poly1->current = poly1->current->next; // sets current to next number 
   
   for(int i = 1; i <= order; i ++) // for loop from 0 to highest order
   {
-    fprintf( stdout, " + %lfx^%d", poly1->current->d.coefficient, i); // prints coefficient polynominal starting at least significant
+    fprintf(stdout, " + %lfx^%d", poly1->current->d.coefficient, i); // prints coefficient polynominal starting at least significant
       poly1->current = poly1->current->next; // sets current to next number 
   }
   // Print new line
-  printf("\n\n");
+  fprintf(stdout, "\n\n");
 }
