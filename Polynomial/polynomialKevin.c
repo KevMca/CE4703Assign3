@@ -155,10 +155,13 @@ int polyDelete(polyList *poly)
 int deleteNext(polyNode *current)
 {
     polyNode *toDelete;
-    if (current->next == NULL) {
+    if (current->next == NULL)
+    {
         // Next is tail => cannot remove node
         return -1;
-    } else {
+    }
+    else
+    {
         // 1. Keep pointer to node to be deleted
         toDelete = current->next;
         // 2. Set successor of current to successor of node to be deleted
