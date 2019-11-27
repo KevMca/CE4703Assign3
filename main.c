@@ -19,9 +19,8 @@ polyList *polyDeclare()
   printf("Please enter the coefficients of the polynomial from least to most significant\n");
   for(int i = 0; i <= order; i++){
     scanf("%lf", &coeff[i]);
+    fillPoly(poly, order, coeff[i]);
   }
-
-  fillPoly(poly, order, coeff);
 
   return poly;
 }
