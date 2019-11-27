@@ -1,6 +1,9 @@
-# DS store files - annoying files on mac
+# Ignore all
 *
+
+# Track these
 !*.c
 !*.h
 !Makefile
 !*.md
+!*.txt
