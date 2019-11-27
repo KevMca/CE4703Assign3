@@ -18,27 +18,27 @@
 	return 0;
 }*/
 
-// function multiply: multiplies a polynomial by a double
+///////////////////////////////////////////////////////
+// polyMultiply(poly1, multiplier)
+// multiplies a polynomial by a double
 //
-// parameters:
-// poly: polynomial to be multiplied
-// multiplyer: number that multiplies the polynomial
-//
-// return:
-// polyMul: polynomial that was multiplied
+// parameters:  poly1 - pointer for the polynomial
+//              multiplier - number that multiplies the polynomial
+// return: polynomial that was multiplied
+///////////////////////////////////////////////////////
 
 //uses a for loop to move through the link list and 
 //multiply each coefficient by a double value
-polyList *multiply(polyList *poly, double multiplyer)
+polyList *polyMultiply(polyList *poly1, double multiplier)
 {
 	polyList *polyMul; //creates a new polynomial to use for multiplication
 	polyMul = polyCreate();
-	int ord = polyOrder(poly); //int ord is assigned the value of the order of the polynomial
+	int ord = polyOrder(poly1); //int ord is assigned the value of the order of the polynomial
 	//Assign head first
 	polyMul->current = polyMul->head;
 	polyMul->current->d.order = 0;
 	polyMul->current->d.coefficient = 
-                        (poly->current->d.coefficient) * (multiplyer);
+                        (poly1->current->d.coefficient) * (multiplier);
 	
 	//Assign the remaining coefficients
 	for(int i = 1; i <= ord; i++)
@@ -50,31 +50,30 @@ polyList *multiply(polyList *poly, double multiplyer)
 		//value of current coefficient is multiped 
                 //by the double and stored in the new polynomial
 		polyMul->current->d.coefficient = 
-			(poly->current->d.coefficient) * (multiplyer);
+			(poly1->current->d.coefficient) * (multiplier);
 	}
 	return polyMul; //returns the multipied polynomial
 }
-
-// function divide: divides a polynomial by a double
+//////////////////////////////////////////////////////
+// polyDivide(poly1, divider)
+// divides a polynomial by a double
 //
-// parameters:
-// poly: polynomial to be divided
-// multiplyer: number that divides the polynomial
-//
-// return:
-// polyDiv: polynomial that was divided
+// parameters:  poly1 - pointer for the polynomial
+//              divider - number that divides the polynomial
+// return: polynomial that was divided
+///////////////////////////////////////////////////////
 
 //uses a for loop to move through the link list and divide each coefficient by a double value
-polyList *divide(polyList *poly, double divider)
+polyList *polyDivide(polyList *poly1, double divider)
 {
 	polyList *polyDiv; //creates a new polynomial to use for division
 	polyDiv = polyCreate();
-	int ord = polyOrder(poly); //int ord is assigned the value of the order of the polynomial
+	int ord = polyOrder(poly1); //int ord is assigned the value of the order of the polynomial
 	//Assign head first
 	polyDiv->current = polyDiv->head;
 	polyDiv->current->d.order = 0;
 	polyDiv->current->d.coefficient = 
-		(poly->current->d.coefficient) / (divider);
+		(poly1->current->d.coefficient) / (divider);
 	//Assign the remaining coefficients
 	for(int i = 1; i <= ord; i++)
 	{	
@@ -85,7 +84,7 @@ polyList *divide(polyList *poly, double divider)
                 //value of current coefficient is multiped 
                 //by the double and stored in the new polynomial
                 polyDiv->current->d.coefficient = 
-                        (poly->current->d.coefficient) / (divider);
+                        (poly1->current->d.coefficient) / (divider);
 	}
 	return polyDiv; //returns the divided polynomial 
 }
