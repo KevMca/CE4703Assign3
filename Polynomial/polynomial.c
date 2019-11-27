@@ -384,7 +384,7 @@ polyList *polyNormalise(polyList *poly1)
   }
   highCoeff = poly1->current->d.coefficient; // stores coefficient
   poly1->current = poly1->head;
-  norm = divide(poly1, highCoeff); // calls dividing function
+  norm = polyDivide(poly1, highCoeff); // calls dividing function
   return norm; // returns coefficient of highest order 
 }
 
