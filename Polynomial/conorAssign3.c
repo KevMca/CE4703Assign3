@@ -26,16 +26,15 @@ int main()
   printf("sub = %lf\n", polyS->head->d.coefficient);
 }
 
-/*
-  function add: adds two polynomials together
+///////////////////////////////////////////////////////
+// polyAdd(poly1, poly2)
+// Adds two polynomials together
+//
+// parameters:  poly1 - pointer for the first polynomial to added 
+//              poly2 - pointer for the second polynomial to be added
+// return: sum of poly1 and poly2
+///////////////////////////////////////////////////////
 
-  parameters: 
-  poly1: pointer for the first polynomial to added 
-  poly2: pointer for the second polynomial to be added
-
-  return:
-  poly3: sum of poly1 and poly2
- */
 polyList *polyAdd(polyList *poly1, polyList *poly2)
 {
   polyList *poly3; // declares a polynomial
@@ -100,16 +99,15 @@ polyList *polyAdd(polyList *poly1, polyList *poly2)
   return poly3;
 }
 
-/*
-  function subract: subtracts a polynomial from another
+///////////////////////////////////////////////////////
+// polySubtract(poly1, poly2)
+// subtracts a polynomial from another
+//
+// parameters:  poly1 - pointer for the minuend polynomial
+//              poly2 - pointer for the the subtrahend polynomial
+// return: poly1 - poly2
+///////////////////////////////////////////////////////
 
-  parameters:
-  poly1: the minuend polynomial
-  poly2: the subtrahend polynomial
-
-  return:
-  poly3: poly1 - poly2
- */
 polyList *polySubtract(polyList *poly1, polyList *poly2)
 {
   polyList *poly3;
