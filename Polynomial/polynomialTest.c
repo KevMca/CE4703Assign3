@@ -21,25 +21,58 @@
 //////////////////////////////////////////////////
 int main(int argc, char **argv)
 {
+	int passed = 0;
   	/////////////////////////////////////////////////////////
   	// polynomial create and delete
   	/////////////////////////////////////////////////////////
 	
-	// Test polyCreate
+	// Test polyCreate //////////////////////////////////////
+	passed = 0;
+
 	polyList *poly1 = polyCreate();
+	
+	// If next node from head is NULL it probably created properly
 	if(poly1->head->next == NULL)
 	{
-		printf("poly1->head->next intitialised to NULL\n");
-		printf("polyCreate() PASSED\n");
+		passed = 1;
 	}
+	if(passed == 1)
+		printf("\npoly1->head->next intitialised to NULL\n"
+			"polyCreate() PASSED\n");
 	else
-	{
-		printf("poly1->head->next not intitialised to NULL\n");
-		printf("polyCreate() FAILED, check implementation\n");
-	}
+		printf("\npoly1->head->next not intitialised to NULL\n"
+			"polyCreate() FAILED, check implementation\n");
 
-	// Test fillPoly
-	//fillyPoly()
+	// Test fillPoly ////////////////////////////////////////
+	passed = 0;
+
+	double arrFill[] = {0, 1, 2, 3};
+	fillPoly(poly1, 3, arrFill);
+	
+	// Reset the current cursor to be able to test
+	poly1->current = poly1->head;
+	// Test if each coefficient is correct
+	for(int i = 0; i <= 3; i++)
+	{
+		if(poly1->current->d.coefficient == arrFill[i] 
+			&& poly1->current->d.order == i)
+		{
+			passed = 1;
+			poly1->current = poly1->current->next;
+		}
+		else
+		{
+			passed = 0;
+			break;
+		}
+	}
+	if(passed == 1)
+		printf("\nAll coefficients are correct\n"
+			"fillyPoly() PASSED\n");
+	else
+		printf("\nNot all coefficients are correct\n"
+			"fillyPoly() FAILED, check implementation\n");
+
 
 	// Test new coeff
 	//newCoeff()

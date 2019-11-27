@@ -131,7 +131,7 @@ int main()
 	  polyPrintList(polyArray, polyArrayCounter);
 	  scanf("%d", &polyChoice1);
 	  constant = polyOrder(polyArray[polyChoice1 - 1]);
-	  printf("The order of the polynomial chosen is %lf\n", constant);
+	  printf("The order of the polynomial chosen is %.0lf\n", constant);
 	  break;
 	  
 	// ends loop, closes program
