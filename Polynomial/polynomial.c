@@ -8,7 +8,7 @@
 #include "polynomial.h"
 
 ///////////////////////////////////////////////////
-// Name: polyCreate()
+// Name: polyCreate
 // Purpose: Creates and empty polynomial, head points
 //          to tail and has no coeffiecients.
 // Parameters: Use fillPoly() or newCoeff() to add
@@ -105,7 +105,7 @@ polyNode *newCoeff(double coefficient, int order)
 }
 
 //////////////////////////////////////////////////
-// Name: polyDelete()
+// Name: polyDelete
 // Purpose: Deletes and frees up memory from a
 // 	    polynomial
 // Parameters: poly - the to delete
@@ -160,7 +160,7 @@ int deleteNext(polyNode *current)
 }
 
 ///////////////////////////////////////////////////////
-// Name: polyAdd()
+// Name: polyAdd
 // Purpose: Adds two polynomials together
 // Parameters:  poly1 - pointer for the first polynomial to added 
 //              poly2 - pointer for the second polynomial to be added
@@ -231,7 +231,7 @@ polyList *polyAdd(polyList *poly1, polyList *poly2)
 }
 
 ///////////////////////////////////////////////////////
-// Name: polySubtract()
+// Name: polySubtract
 // Purpose: Subtracts a polynomial from another
 // Parameters:  poly1 - pointer for the minuend polynomial
 //              poly2 - pointer for the the subtrahend polynomial
@@ -298,7 +298,7 @@ polyList *polySubtract(polyList *poly1, polyList *poly2)
 }
 
 ///////////////////////////////////////////////////////
-// Name: polyMultiply()
+// Name: polyMultiply
 // Purpose: Multiplies a polynomial by a double
 // Parameters: poly1 - pointer for the polynomial
 //             multiplier - number that multiplies the polynomial
@@ -332,7 +332,7 @@ polyList *polyMultiply(polyList *poly1, double multiplier)
 }
 
 //////////////////////////////////////////////////////
-// Name: polyDivide()
+// Name: polyDivide
 // Purpose: Divides a polynomial by a double
 // Parameters: poly1 - pointer for the polynomial
 //             divider - number that divides the polynomial
@@ -365,7 +365,7 @@ polyList *polyDivide(polyList *poly1, double divider)
 }
 
 //////////////////////////////////////////////////////
-// Name: normalise()
+// Name: polyNormalise
 // Purpose: Adjusts coeffiecients so that the coefficient
 //          of highest order is 1
 // parameters: poly1 - pointer to the polynomial
@@ -391,7 +391,7 @@ polyList *polyNormalise(polyList *poly1)
 }
 
 /////////////////////////////////////////////////////
-// Name: order()
+// Name: polyOrder
 // Purpose: Finds the highest power whos coefficient
 // 	    isnt 0
 // Parameters: poly1 - pointer to the polynomial
@@ -415,7 +415,7 @@ int polyOrder(polyList *poly1)
 }
 
 ////////////////////////////////////////////////////
-// Name: print()
+// Name: polyPrint
 // Purpose: prints a polynomial to stdout
 // Parameters: poly1 - pointer to the polynomial
 // Return: The printed polynomial to the stdout
