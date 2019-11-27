@@ -36,18 +36,21 @@ int main()
   return:
   poly3: sum of poly1 and poly2
  */
-polyList *polyAdd(polyList *poly1, polyList *poly2){
+polyList *polyAdd(polyList *poly1, polyList *poly2)
+{
   polyList *poly3; // declares a polynomial
   poly3 = polyCreate(); // creates an empty polynomial
   int smallOrd, bigOrd, whichOrd;
   // checks which polynomial has a higher order
   // assigns variables for each order
-  if(polyOrder(poly1) > polyOrder(poly2)){
+  if(polyOrder(poly1) > polyOrder(poly2))
+  {
     whichOrd = 1;
     smallOrd = polyOrder(poly2);
     bigOrd = polyOrder(poly1);
   }
-  else{
+  else
+  {
     smallOrd = polyOrder(poly1);
     bigOrd = polyOrder(poly2);
   }
@@ -58,7 +61,8 @@ polyList *polyAdd(polyList *poly1, polyList *poly2){
   poly3->current = poly3->head;
 
   // adds each coefficient of the polynomials to each other until one runs out of coefficients
-  for(int i = 0; i <= smallOrd; i++){
+  for(int i = 0; i <= smallOrd; i++)
+  {
     poly3->current->d.coefficient = poly1->current->d.coefficient + poly2->current->d.coefficient;
     poly1->current = poly1->current->next;
     poly2->current = poly2->current->next;
@@ -67,8 +71,10 @@ polyList *polyAdd(polyList *poly1, polyList *poly2){
   }
 
   // checks which polynomial has the higher order then assigns the rest of its terms to poly3
-  if(whichOrd == 1){
-    for(int i = smallOrd + 1; i < bigOrd; i++){
+  if(whichOrd == 1)
+  {
+    for(int i = smallOrd + 1; i < bigOrd; i++)
+    {
       poly3->current->d.coefficient = poly1->current->d.coefficient;
       poly1->current = poly1->current->next;
       poly3->current->next = newCoeff(0, i);
@@ -76,8 +82,10 @@ polyList *polyAdd(polyList *poly1, polyList *poly2){
     }
     poly3->current->d.coefficient = poly1->current->d.coefficient; // final assign, doesn't make a new node
   }
-  else{
-    for(int i = smallOrd + 1; i < bigOrd; i++){
+  else
+  {
+    for(int i = smallOrd + 1; i < bigOrd; i++)
+    {
       poly3->current->d.coefficient = poly2->current->d.coefficient;
       poly2->current = poly2->current->next;
       poly3->current->next = newCoeff(0, i);
@@ -102,23 +110,27 @@ polyList *polyAdd(polyList *poly1, polyList *poly2){
   return:
   poly3: poly1 - poly2
  */
-polyList *polySubtract(polyList *poly1, polyList *poly2){
+polyList *polySubtract(polyList *poly1, polyList *poly2)
+{
   polyList *poly3;
   poly3 = polyCreate(); // creates an empty polynomial
   int smallOrd, bigOrd, whichOrd;
   // checks which polynomial has the higher order
-  if(polyOrder(poly1) > polyOrder(poly2)){
+  if(polyOrder(poly1) > polyOrder(poly2))
+  {
     whichOrd = 1;
     smallOrd = polyOrder(poly2);
     bigOrd = polyOrder(poly1);
   }
-  else{
+  else
+  {
     smallOrd = polyOrder(poly1);
     bigOrd = polyOrder(poly2);
   }
 
   // subracts poly2 from poly1 until one runs out of coefficients
-  for(int i = 0; i <= smallOrd; i++){
+  for(int i = 0; i <= smallOrd; i++)
+  {
     poly3->current->d.coefficient = poly1->current->d.coefficient - poly2->current->d.coefficient;
     poly1->current = poly1->current->next;
     poly2->current = poly2->current->next;
@@ -129,8 +141,10 @@ polyList *polySubtract(polyList *poly1, polyList *poly2){
   // checks which polynomial has the higher order
   // if the minuend has a higher order, its remaining elements are assigned to poly3
   // if the subtrahend has a higher order, the inverse of its remaining elements are assigned to poly3
-  if(whichOrd == 1){
-    for(int i = smallOrd + 1; i < bigOrd; i++){
+  if(whichOrd == 1)
+  {
+    for(int i = smallOrd + 1; i < bigOrd; i++)
+    {
       poly3->current->d.coefficient = poly1->current->d.coefficient;
       poly1->current = poly1->current->next;
       poly3->current->next = newCoeff(0, i);
@@ -138,8 +152,10 @@ polyList *polySubtract(polyList *poly1, polyList *poly2){
     }
     poly3->current->d.coefficient = poly1->current->d.coefficient;
   }
-  else{
-    for(int i = smallOrd + 1; i < bigOrd; i++){
+  else
+  {
+    for(int i = smallOrd + 1; i < bigOrd; i++)
+    {
       poly3->current->d.coefficient = 0 - poly2->current->d.coefficient;
       poly2->current = poly2->current->next;
       poly3->current->next = newCoeff(0, i);
