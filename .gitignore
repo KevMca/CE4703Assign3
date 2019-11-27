@@ -1,7 +1,6 @@
 # DS store files - annoying files on mac
-*.DS_STORE
-*~
-*swp
-*swo
-*.DSYM
-*.o
+*
+!*.c
+!*.h
+!Makefile
+!*.md
