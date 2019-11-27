@@ -5,6 +5,16 @@
 
 #include "polynomial.h"
 
+///////////////////////////////////////////////////
+// Name: polyCreate()
+// Purpose: Creates and empty polynomial, head points
+//          to tail and has no coeffiecients.
+// Parameters: Use fillPoly() or newCoeff() to add
+//             new coefficiients.
+// return: pointer to polynomial if successful
+//   	   NULL if unsuccessful
+///////////////////////////////////////////////////
+
 polyList *polyCreate()
 {
     polyList *poly;
@@ -31,6 +41,16 @@ polyList *polyCreate()
     return poly;
 }
 
+//////////////////////////////////////////////////
+// Name: fillPoly
+// Purpose: Fills an empty polynomial of a
+//          certain order with coefficients in arr[]
+// Parameters: poly - the empty polynomial to fill
+// 	       order - the order of the polynomial
+//	       arr - the array of coefficients
+// Return: Pointer to polynomial if successful
+//////////////////////////////////////////////////
+
 int fillPoly(polyList *poly, int order, double arr[])
 {
     // Fill polyList parameters
@@ -53,6 +73,16 @@ int fillPoly(polyList *poly, int order, double arr[])
     return 0;
 }
 
+//////////////////////////////////////////////////
+// Name: newCoeff
+// Purpose: Creates and returns a new polyNode to
+// 	    be added to the next node of the
+//	    previous node
+// Parameters: coefficient - the value of the coefficient
+//   	       order - the order of the coefficient
+// Return:  pointer to the new node, if successful
+//////////////////////////////////////////////////
+
 polyNode *newCoeff(double coefficient, int order)
 {
     // Allocate memory for new node
@@ -72,6 +102,14 @@ polyNode *newCoeff(double coefficient, int order)
     return new_node;
 }
 
+//////////////////////////////////////////////////
+// Name: polyDelete()
+// Purpose: Deletes and frees up memory from a
+// 	    polynomial
+// Parameters: poly - the to delete
+// Return: returns 0 if successful
+//////////////////////////////////////////////////
+
 int polyDelete(polyList *poly)
 {
     // Reset
@@ -89,6 +127,15 @@ int polyDelete(polyList *poly)
     free(poly);
     return 0;
 }
+
+//////////////////////////////////////////////////
+// Name: deleteNext
+// Purpose: Deletes and frees up memory for the next
+// 	    node after the current node specified
+// Parameters: toDelete - the coefficient node to
+// 	       to delete
+// Return: returns 0 if successful
+//////////////////////////////////////////////////git 
 
 int deleteNext(polyNode *current)
 {
@@ -109,6 +156,14 @@ int deleteNext(polyNode *current)
     }
     return 0;
 }
+
+///////////////////////////////////////////////////////
+// Name: polyAdd()
+// Purpose: Adds two polynomials together
+// Parameters:  poly1 - pointer for the first polynomial to added 
+//              poly2 - pointer for the second polynomial to be added
+// Return: sum of poly1 and poly2
+///////////////////////////////////////////////////////
 
 polyList *polyAdd(polyList *poly1, polyList *poly2)
 {
@@ -173,6 +228,14 @@ polyList *polyAdd(polyList *poly1, polyList *poly2)
   return poly3;
 }
 
+///////////////////////////////////////////////////////
+// Name: polySubtract()
+// Purpose: Subtracts a polynomial from another
+// Parameters:  poly1 - pointer for the minuend polynomial
+//              poly2 - pointer for the the subtrahend polynomial
+// Return: poly1 minus poly2
+///////////////////////////////////////////////////////
+
 polyList *polySubtract(polyList *poly1, polyList *poly2)
 {
   polyList *poly3;
@@ -232,16 +295,24 @@ polyList *polySubtract(polyList *poly1, polyList *poly2)
   return poly3;
 }
 
-polyList *multiply(polyList *poly, double multiplyer)
+///////////////////////////////////////////////////////
+// Name: polyMultiply()
+// Purpose: Multiplies a polynomial by a double
+// Parameters: poly1 - pointer for the polynomial
+//             multiplier - number that multiplies the polynomial
+// Return: Polynomial that was multiplied
+///////////////////////////////////////////////////////
+
+polyList *polyMultiply(polyList *poly1, double multiplier)
 {
 	polyList *polyMul; //creates a new polynomial to use for multiplication
 	polyMul = polyCreate();
-	int ord = polyOrder(poly); //int ord is assigned the value of the order of the polynomial
+	int ord = polyOrder(poly1); //int ord is assigned the value of the order of the polynomial
 	//Assign head first
 	polyMul->current = polyMul->head;
 	polyMul->current->d.order = 0;
 	polyMul->current->d.coefficient = 
-                        (poly->current->d.coefficient) * (multiplyer);
+                        (poly1->current->d.coefficient) * (multiplier);
 	
 	//Assign the remaining coefficients
 	for(int i = 1; i <= ord; i++)
@@ -253,21 +324,29 @@ polyList *multiply(polyList *poly, double multiplyer)
 		//value of current coefficient is multiped 
                 //by the double and stored in the new polynomial
 		polyMul->current->d.coefficient = 
-			(poly->current->d.coefficient) * (multiplyer);
+			(poly1->current->d.coefficient) * (multiplier);
 	}
 	return polyMul; //returns the multipied polynomial
 }
 
-polyList *divide(polyList *poly, double divider)
+//////////////////////////////////////////////////////
+// Name: polyDivide()
+// Purpose: Divides a polynomial by a double
+// Parameters: poly1 - pointer for the polynomial
+//             divider - number that divides the polynomial
+// Return: Polynomial that was divided
+///////////////////////////////////////////////////////
+
+polyList *polyDivide(polyList *poly1, double divider)
 {
 	polyList *polyDiv; //creates a new polynomial to use for division
 	polyDiv = polyCreate();
-	int ord = polyOrder(poly); //int ord is assigned the value of the order of the polynomial
+	int ord = polyOrder(poly1); //int ord is assigned the value of the order of the polynomial
 	//Assign head first
 	polyDiv->current = polyDiv->head;
 	polyDiv->current->d.order = 0;
 	polyDiv->current->d.coefficient = 
-		(poly->current->d.coefficient) / (divider);
+		(poly1->current->d.coefficient) / (divider);
 	//Assign the remaining coefficients
 	for(int i = 1; i <= ord; i++)
 	{	
@@ -278,10 +357,20 @@ polyList *divide(polyList *poly, double divider)
                 //value of current coefficient is multiped 
                 //by the double and stored in the new polynomial
                 polyDiv->current->d.coefficient = 
-                        (poly->current->d.coefficient) / (divider);
+                        (poly1->current->d.coefficient) / (divider);
 	}
 	return polyDiv; //returns the divided polynomial 
 }
+
+//////////////////////////////////////////////////////
+// Name: normalise()
+// Purpose: Adjusts coeffiecients so that the coefficient
+//          of highest order is 1
+// parameters: poly1 - pointer to the polynomial
+// Return: norm, the adjusted version of poly1 so
+// 	   coefficient of highest order is 1
+//////////////////////////////////////////////////////
+
 
 polyList *polyNormalise(polyList *poly1)
 {
@@ -299,6 +388,14 @@ polyList *polyNormalise(polyList *poly1)
   return norm; // returns coefficient of highest order 
 }
 
+/////////////////////////////////////////////////////
+// Name: order()
+// Purpose: Finds the highest power whos coefficient
+// 	    isnt 0
+// Parameters: poly1 - pointer to the polynomial
+// Return: highOrder, the most significant order
+/////////////////////////////////////////////////////
+
 int polyOrder(polyList *poly1)
 {
   int highOrder; // variable to store highest order in polyList
@@ -314,6 +411,13 @@ int polyOrder(polyList *poly1)
   poly1->current = poly1->head;
   return highOrder; // returns most significant order
 }
+
+////////////////////////////////////////////////////
+// Name: print()
+// Purpose: prints a polynomial to stdout
+// Parameters: poly1 - pointer to the polynomial
+// Return: The printed polynomial to the stdout
+////////////////////////////////////////////////////
 
 void polyPrint(polyList *poly1)
 {  
