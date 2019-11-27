@@ -430,7 +430,7 @@ void polyPrint(polyList *poly1)
   
   for(int i = 1; i <= order; i ++) // for loop from 0 to highest order
   {
-    fprintf(stdout, " + %.3gcc -Wall -ggdb -o $@ $^lfx^%d", poly1->current->d.coefficient, i); // prints coefficient polynominal starting at least significant
+    fprintf(stdout, " + %.3lfx^%d", poly1->current->d.coefficient, i); // prints coefficient polynominal starting at least significant
       poly1->current = poly1->current->next; // sets current to next number 
   }
   // Print new line
