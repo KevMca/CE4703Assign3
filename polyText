@@ -4,7 +4,6 @@
 // date: 27/11/19
 // purpose: Contains and explanation of designed data type, specifications and pseudo-code for
 //          all operations
-//
 ////////////////////////////////////////////////////
 
 
@@ -12,31 +11,62 @@
 // Pseudo-code for all operations
 ///////////////////////////////////////////////////
 
-int create(address of polylist, order of poly, array of coefficients)
+polyList polyDeclare()
 {
-	Create (order number + 1) of elements
-    	For order:
-            addNode()
+
 }
 
 
-int addNode()
+polyList *polyCreate()
 {
-	malloc
+	creates a polyList and assigns it the required memory with malloc
+	checks for allocation success
+	allocates memory for the head
+	if allocation fails
+	   deallocate list and set it to NULL
+	return poly
+}
+
+int fillPoly(polyList, order, array)
+{
+	fill polyList parameters
+	assign head coefficients
+	for all the powers of x
+	    assign the coefficients
+	    set current to next
+	reset currnet to head
 }
 
 
-delete(address of polylist)
+polyNode *newCoeff(coefficient, order)
 {
-	For loop
-            deleteNode()
+	allocate memory for the new node
+	exit if allocation results in a NULL
+	assign attributes
+	link node to current node
 }
 
 
-Int deleteNode()
+polyDelete(address of polylist)
 {
-	free
+	reset current to head
+	while (there is a next node)
+	      delete current node
+	free head and polynomial
 }
+
+
+Int deleteNext(ptr to current address)
+{
+	sets a node to delete
+	if reaches tail
+	   return -1
+	else
+	   keeps ptr to node to be deleted
+	   set next to current
+	   delete node from memory
+}
+
 
 polyList add(polylist1, polylist2)
 {
@@ -113,7 +143,3 @@ Void print(polylist)
 	    Prints the remaining coefficients with respective order
 }
 
-Kevin - create / delete
-Conor - add / subtract
-Stephen - multiply / divide
-Aaron - normalise / order / print
