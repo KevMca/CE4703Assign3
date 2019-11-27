@@ -3,8 +3,6 @@
 // Author: Kevin McAndrew, Aaron Naylor, Stephen Gannon, Conor Pesch
 // Date: 27/11/2019
 
-#include <stdio.h>
-#include <stdlib.h>
 #include "polynomial.h"
 
 polyList *polyCreate()
