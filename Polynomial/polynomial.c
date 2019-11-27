@@ -1,7 +1,9 @@
+////////////////////////////////////////////////////
 // polynomial.c
 // Purpose: Contains all functions to create, delete and manipulate the polynomial
 // Author: Kevin McAndrew, Aaron Naylor, Stephen Gannon, Conor Pesch
 // Date: 27/11/2019
+////////////////////////////////////////////////////
 
 #include "polynomial.h"
 
