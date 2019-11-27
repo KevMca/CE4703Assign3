@@ -13,6 +13,11 @@
   polyPrint(poly1);
 }*/
 
+// function Print: prints a polynomial
+//
+// Parameters:
+// poly1: pointer to the polynomial
+
 void polyPrint(polyList *poly1)
 {  
   int order = polyOrder(poly1); // get highest order that coefficient isn't 0
