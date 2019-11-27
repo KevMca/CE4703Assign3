@@ -18,6 +18,15 @@
 	return 0;
 }*/
 
+// function multiply: multiplies a polynomial by a double
+//
+// parameters:
+// poly: polynomial to be multiplied
+// multiplyer: number that multiplies the polynomial
+//
+// return:
+// polyMul: polynomial that was multiplied
+
 //uses a for loop to move through the link list and 
 //multiply each coefficient by a double value
 polyList *multiply(polyList *poly, double multiplyer)
@@ -45,6 +54,15 @@ polyList *multiply(polyList *poly, double multiplyer)
 	}
 	return polyMul; //returns the multipied polynomial
 }
+
+// function divide: divides a polynomial by a double
+//
+// parameters:
+// poly: polynomial to be divided
+// multiplyer: number that divides the polynomial
+//
+// return:
+// polyDiv: polynomial that was divided
 
 //uses a for loop to move through the link list and divide each coefficient by a double value
 polyList *divide(polyList *poly, double divider)
