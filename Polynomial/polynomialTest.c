@@ -73,9 +73,33 @@ int main(int argc, char **argv)
 		printf("\nNot all coefficients are correct\n"
 			"fillyPoly() FAILED, check implementation\n");
 
+	// Test newCoeff ////////////////////////////////////////
+	passed = 0;
+	int ord = 0;
 
-	// Test new coeff
-	//newCoeff()
+	// Reset current pointer and move to the end
+	poly1->current = poly1->head;
+	while(poly1->current->next != NULL)
+	{
+		poly1->current = poly1->current->next;
+		ord++;
+	}
+	// Add new coefficient to the end
+	poly1->current->next = newCoeff(10, ord + 1);
+	
+	// Test if the new coefficient was added on the end
+	poly1->current = poly1->current->next;
+	if(poly1->current->d.coefficient == 10 
+			&& poly1->current->d.order == ord + 1)
+		passed = 1;
+
+	if(passed == 1)
+		printf("\nAdded coefficient correctly\n"
+			"newCoeff() PASSED\n");
+	else
+		printf("\nDidn't add coefficient correctly\n"
+			"newCoeff() FAILED, check implementation\n");
+
 	//polyDelete()
 	//deleteNext()
 
