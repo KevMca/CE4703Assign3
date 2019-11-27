@@ -7,15 +7,25 @@
 ////////////////////////////////////////////////////
 
 
-///////////////////////////////////////////////////
-// Pseudo-code for all operations
-///////////////////////////////////////////////////
+////////////////////////////////////////////////////
+// Specifications and  Pseudo-code for all operations
+////////////////////////////////////////////////////
 
 polyList polyDeclare()
 {
 
 }
 
+
+///////////////////////////////////////////////////
+// Name: polyCreate()
+// Purpose: Creates and empty polynomial, head points
+//          to tail and has no coeffiecients.
+// Parameters: Use fillPoly() or newCoeff() to add
+//             new coefficiients.
+// return: pointer to polynomial if successful
+//   	   NULL if unsuccessful
+///////////////////////////////////////////////////
 
 polyList *polyCreate()
 {
@@ -26,6 +36,17 @@ polyList *polyCreate()
 	   deallocate list and set it to NULL
 	return poly
 }
+
+
+//////////////////////////////////////////////////
+// Name: fillPoly
+// Purpose: Fills an empty polynomial of a
+//          certain order with coefficients in arr[]
+// Parameters: poly - the empty polynomial to fill
+// 	       order - the order of the polynomial
+//	       arr - the array of coefficients
+// Return: Pointer to polynomial if successful
+//////////////////////////////////////////////////
 
 int fillPoly(polyList, order, array)
 {
@@ -38,6 +59,16 @@ int fillPoly(polyList, order, array)
 }
 
 
+//////////////////////////////////////////////////
+// Name: newCoeff
+// Purpose: Creates and returns a new polyNode to
+// 	    be added to the next node of the
+//	    previous node
+// Parameters: coefficient - the value of the coefficient
+//   	       order - the order of the coefficient
+// Return:  pointer to the new node, if successful
+//////////////////////////////////////////////////
+
 polyNode *newCoeff(coefficient, order)
 {
 	allocate memory for the new node
@@ -47,6 +78,14 @@ polyNode *newCoeff(coefficient, order)
 }
 
 
+//////////////////////////////////////////////////
+// Name: polyDelete()
+// Purpose: Deletes and frees up memory from a
+// 	    polynomial
+// Parameters: poly - the to delete
+// Return: returns 0 if successful
+//////////////////////////////////////////////////
+
 polyDelete(address of polylist)
 {
 	reset current to head
@@ -55,6 +94,15 @@ polyDelete(address of polylist)
 	free head and polynomial
 }
 
+
+//////////////////////////////////////////////////
+// Name: deleteNext
+// Purpose: Deletes and frees up memory for the next
+// 	    node after the current node specified
+// Parameters: toDelete - the coefficient node to
+// 	       to delete
+// Return: returns 0 if successful
+//////////////////////////////////////////////////
 
 Int deleteNext(ptr to current address)
 {
@@ -68,7 +116,8 @@ Int deleteNext(ptr to current address)
 }
 
 
-polyList add(polylist1, polylist2)
+
+polyList polyAdd(polylist1, polylist2)
 {
 	 If polylist1 >= polylist2
 	    Create polylist of size order+1
@@ -84,7 +133,7 @@ polyList add(polylist1, polylist2)
     	    	Add all elements to 0 for overflow
 }
 
-polyList subtract(polylist1, polylist2)
+polyList polySubtract(polylist1, polylist2)
 {
 	 If polylist1 >= polylist2
             Create polylist of size order+1
