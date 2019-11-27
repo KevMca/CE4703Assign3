@@ -24,19 +24,35 @@ int main(int argc, char **argv)
   	/////////////////////////////////////////////////////////
   	// polynomial create and delete
   	/////////////////////////////////////////////////////////
-	polyCreate()
-	fillyPoly()
-	newCoeff()
-	polyDelete()
-	deleteNext()
+	
+	// Test polyCreate
+	polyList *poly1 = polyCreate();
+	if(poly1->head->next == NULL)
+	{
+		printf("poly1->head->next intitialised to NULL\n");
+		printf("polyCreate() PASSED\n");
+	}
+	else
+	{
+		printf("poly1->head->next not intitialised to NULL\n");
+		printf("polyCreate() FAILED, check implementation\n");
+	}
+
+	// Test fillPoly
+	//fillyPoly()
+
+	// Test new coeff
+	//newCoeff()
+	//polyDelete()
+	//deleteNext()
 
 	/////////////////////////////////////////////////////////
   	// polynomial operations
   	/////////////////////////////////////////////////////////
-  	polyAdd()
-  	polySubtract()
-  	multiply()
-  	divide()
-  	polyNormalise()
-  	polyOrder()
+  	//polyAdd()
+  	//polySubtract()
+  	//multiply()
+  	//divide()
+  	//polyNormalise()
+  	//polyOrder()
 }
