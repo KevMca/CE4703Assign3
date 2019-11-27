@@ -15,13 +15,13 @@ int main()
   printf("%lf\n", polyNorm->current->d.coefficient);
 }*/
 
-// fucntion normalise: adjusts coeffiecients so that the coefficient of highest order is 1
+///////////////////////////////////////////////////////
+// polyNormalise(poly1)
+// adjusts coeffiecients so that the coefficient of highest order is 1
 //
-// parameters:
-// poly1: pointer to the polynomial
-//
-// return:
-// norm: adjusted version of poly1 so coefficient of highest order is 1
+// parameters:  poly1 - pointer for the polynomial
+// return: adjusted version of poly1 so coefficient of highest order is 1
+///////////////////////////////////////////////////////
 
 polyList *polyNormalise(polyList *poly1)
 {
@@ -38,14 +38,13 @@ polyList *polyNormalise(polyList *poly1)
   norm = divide(poly1, highCoeff); // calls dividing function
   return norm; // returns adjusted poly1 
 }
-
-// fucntion order: finds highest power which coeffiecient isn't 0
+///////////////////////////////////////////////////////
+// polyOrder(poly1)
+// finds highest power which coeffiecient isn't 0
 //
-// parameters:
-// poly1: pointer to the polynomial
-//
-// return:
-// highOrder: most significant order
+// parameters:  poly1 - pointer for the polynomial
+// return: most significant order
+///////////////////////////////////////////////////////
 
 int polyOrder(polyList *poly1)
 {
