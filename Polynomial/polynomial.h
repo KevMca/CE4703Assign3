@@ -47,9 +47,9 @@ polyList *polyAdd(polyList *poly1, polyList *poly2);
 // Subtracts 2 polynomials
 polyList *polySubtract(polyList *poly1, polyList *poly2);
 // Multiplies a polynomial by a doubles
-polyList *multiply(polyList *poly, double multiplyer);
+polyList *polyMultiply(polyList *poly, double multiplyer);
 // Divides a polynomial by a double
-polyList *divide(polyList *poly, double divider);
+polyList *polyDivide(polyList *poly, double divider);
 // Normalises a polynomial
 polyList *polyNormalise(polyList *poly1);
 // Returns the highest order of the polynomial
