@@ -6,7 +6,7 @@
 
 
 ////////////////////////////////////////////////////
-// Name: polyDeclare()
+// Name: polyDeclare
 // Purpose: Declares the polynomial, asks the user to enter a polynomial 
 // Return: returns a polynomial
 ////////////////////////////////////////////////////
@@ -34,7 +34,7 @@ polyList *polyDeclare()
 }
 
 ////////////////////////////////////////////////////
-// Name: polyPrintList(polyArray[], polyArrayCounter)
+// Name: polyPrintList
 // Purpose: prints out a list of polynomials
 // Parameters: polyArray[] - pointer to array of polynomials
 //             PolyArrayCounter - counts number of polynomials in the array
