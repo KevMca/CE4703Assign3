@@ -27,7 +27,9 @@ polyList polyDeclare()
 int main()
 {
   int continueLoop = 1;
-
+  polyList polyArray[];
+  int polyArrayCounter = 0;
+  
   while(continueLoop)
     {
       int interfaceChoice;
@@ -41,15 +43,26 @@ int main()
 	  break;
 
 	case 2:
-	  polyList poly = polyDeclare();
+	  int order;
+	  printf("Please enter the order of the polynomial you would like to create: ");
+	  scanf("%d", order);
+	  double coeffArray[order+1];
+	  printf("Please enter the coefficients for the polynomial");
+	  for(int i = 0; i <= order; i++)
+	  {
+	    scanf("%lf", coeffArray[i]);
+	  }
+	  polyArray[polyArrayCounter] = polyDeclare();
+	  fillPoly(&polyArray[polyArrayCounter], order, coeffArray[]);
+	  polyArrayCounter += 1;
 	  break;
 
 	case 3:
-
+	  
 	  break;
 
 	case 4:
-
+	  
 	  break;
 
 	case 5:
@@ -73,7 +86,8 @@ int main()
 	  break;
 
 	default:
-	  printf("Invalid choice. Closing App\n");
+	  printf("Invalid choice. Closing Program\n");
+	  continueLoop = 0;
 	  break;
 	}
     }
