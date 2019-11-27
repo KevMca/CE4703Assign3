@@ -1,39 +1,73 @@
-////////////////////////////////////////////////////
-// PolyText
-// author: Stephen Gannon
-// date: 27/11/19
-// purpose: Contains and explanation of designed data type,
-//   	    specifications and pseudo-code for
-//          all operations
-////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////
+// PolyText                                                //
+// author: Stephen Gannon                                  //
+// date: 27/11/19                                          //
+// purpose: Contains and explanation of designed data type,//
+//   	    specifications and pseudo-code for             //
+//          all operations                                 //
+/////////////////////////////////////////////////////////////
 
 -------------------------------------------------------------------------------
 
 ////////////////////////////////////////////////////
-// Explanation of the designed data type
+// Explanation of the designed data type          //
 ////////////////////////////////////////////////////
 
 
+////////////////////////////////////////////////////
+// polyList is the data type made for the polynomial.
+// It contains a polyNode type for head and current.
+// It also contains an int order which represents the
+// order of the polynomial.
+////////////////////////////////////////////////////
+
+typedef struct
+{
+    polyNode *head;
+    polyNode *current;
+    Int order;
+} polyList;    
 
 
+///////////////////////////////////////////////////
+// polyNode is the data type used for the nodes of
+// the polyList.
+// It contains the polyData data type which contains
+// information on each node.
+// It also contains an address to the next node.
+///////////////////////////////////////////////////
+
+typedef struct
+{
+    polyData d;
+    struct n *next;
+} polyNode;    
 
 
+///////////////////////////////////////////////////
+// polyData is the data type used for defining the
+// information within each node.
+// It contains a double coefficient for each term
+// and int order which is the order of the
+// polynomial.
+///////////////////////////////////////////////////
 
-
-
-
-
+typedef struct
+{
+    double coefficient;
+    int order;
+} polyData;    
 
 
 -------------------------------------------------------------------------------
 
-////////////////////////////////////////////////////
-// Specifications and  Pseudo-code for all operations
-////////////////////////////////////////////////////
+///////////////////////////////////////////////////////
+// Specifications and  Pseudo-code for all operations//
+///////////////////////////////////////////////////////
 
 polyList polyDeclare()
 {
-
+	
 }
 
 
@@ -268,3 +302,4 @@ Void print(polylist)
 	    Prints the remaining coefficients with respective order to stdout
 }
 
+-------------------------------------------------------------------------------------
