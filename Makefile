@@ -14,3 +14,8 @@ polynomial.o: polynomial.c polynomial.h
 
 polynomialTest: polynomialTest.c polynomial.o
 	gcc -Wall -ggdb -o $@ $^
+
+PHONY: clean
+clean:
+	rm -f -r *.dSYM
+	rm -f *.o polynomialTest* *~
