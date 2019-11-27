@@ -301,30 +301,30 @@ polyList *polyNormalise(polyList *poly1)
 
 int polyOrder(polyList *poly1)
 {
-  int length; // variable to store highest order in polyList
+  int highOrder; // variable to store highest order in polyList
   poly1->current = poly1->head;
   for(int i=0; i <= (poly1->order); i ++) // for loop from 0 to length of polylist 
   {
       if(poly1->current->d.coefficient !=0) // if poly1's coefficient is not equal to 0 
       {
-	  length = i; // length is highest order that is not equal to 0
+	  highOrder = i; // length is highest order that is not equal to 0
       } 
       poly1->current = poly1->current->next; // sets current to next value
   }
   poly1->current = poly1->head;
-  return length; // returns most significant order
+  return highOrder; // returns most significant order
 }
 
 void polyPrint(polyList *poly1)
 {  
   int order = polyOrder(poly1); // get highest order that coefficient isn't 0
   poly1->current = poly1->head; // set current to first element
-  fprintf(stdout, "%lf", (poly1->current->d.coefficient)); // prints first element
+  fprintf(stdout, "%.3lf", (poly1->current->d.coefficient)); // prints first element
   poly1->current = poly1->current->next; // sets current to next number 
   
   for(int i = 1; i <= order; i ++) // for loop from 0 to highest order
   {
-    fprintf(stdout, " + %lfx^%d", poly1->current->d.coefficient, i); // prints coefficient polynominal starting at least significant
+    fprintf(stdout, " + %.3gcc -Wall -ggdb -o $@ $^lfx^%d", poly1->current->d.coefficient, i); // prints coefficient polynominal starting at least significant
       poly1->current = poly1->current->next; // sets current to next number 
   }
   // Print new line
