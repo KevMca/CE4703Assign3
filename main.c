@@ -4,6 +4,13 @@
 #include <stdlib.h>
 #include <stdio.h>
 
+
+////////////////////////////////////////////////////
+// Name: polyDeclare()
+// Purpose: Declares the polynomial, asks the user to enter a polynomial 
+// Return: returns a polynomial
+////////////////////////////////////////////////////
+
 polyList *polyDeclare()
 {
   polyList *poly;
@@ -25,6 +32,13 @@ polyList *polyDeclare()
 
   return poly;
 }
+
+////////////////////////////////////////////////////
+// Name: polyPrintList(polyArray[], polyArrayCounter)
+// Purpose: prints out a list of polynomials
+// Parameters: polyArray[] - pointer to array of polynomials
+//             PolyArrayCounter - counts number of polynomials in the array
+////////////////////////////////////////////////////
 
 void polyPrintList(polyList *polyArray[], int polyArrayCounter)
 {
