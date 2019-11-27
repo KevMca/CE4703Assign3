@@ -8,7 +8,7 @@ vpath %.h $(POLYNOMIAL)
 # Make all
 .PHONY: all
 all: polynomialTest PolynomialMain
-	./Polynomialmain
+	./PolynomialMain
 
 PolynomialMain: polynomial.o main.c
 	gcc -Wall -ggdb -o $@ $^
