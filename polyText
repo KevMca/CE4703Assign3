@@ -2,10 +2,30 @@
 // PolyText
 // author: Stephen Gannon
 // date: 27/11/19
-// purpose: Contains and explanation of designed data type, specifications and pseudo-code for
+// purpose: Contains and explanation of designed data type,
+//   	    specifications and pseudo-code for
 //          all operations
 ////////////////////////////////////////////////////
 
+-------------------------------------------------------------------------------
+
+////////////////////////////////////////////////////
+// Explanation of the designed data type
+////////////////////////////////////////////////////
+
+
+
+
+
+
+
+
+
+
+
+
+
+-------------------------------------------------------------------------------
 
 ////////////////////////////////////////////////////
 // Specifications and  Pseudo-code for all operations
@@ -116,6 +136,13 @@ Int deleteNext(ptr to current address)
 }
 
 
+///////////////////////////////////////////////////////
+// Name: polyAdd()
+// Purpose: Adds two polynomials together
+// Parameters:  poly1 - pointer for the first polynomial to added 
+//              poly2 - pointer for the second polynomial to be added
+// Return: sum of poly1 and poly2
+///////////////////////////////////////////////////////
 
 polyList polyAdd(polylist1, polylist2)
 {
@@ -133,6 +160,15 @@ polyList polyAdd(polylist1, polylist2)
     	    	Add all elements to 0 for overflow
 }
 
+
+///////////////////////////////////////////////////////
+// Name: polySubtract()
+// Purpose: Subtracts a polynomial from another
+// Parameters:  poly1 - pointer for the minuend polynomial
+//              poly2 - pointer for the the subtrahend polynomial
+// Return: poly1 minus poly2
+///////////////////////////////////////////////////////
+
 polyList polySubtract(polylist1, polylist2)
 {
 	 If polylist1 >= polylist2
@@ -149,7 +185,16 @@ polyList polySubtract(polylist1, polylist2)
     	         Leave all elements as they are
 }
 
-polyList multiply(polylist, multiplier)
+
+///////////////////////////////////////////////////////
+// Name: polyMultiply()
+// Purpose: Multiplies a polynomial by a double
+// Parameters: poly1 - pointer for the polynomial
+//             multiplier - number that multiplies the polynomial
+// Return: Polynomial that was multiplied
+///////////////////////////////////////////////////////
+
+polyList polyMultiply(polylist, multiplier)
 {
 	Create polylist of size polylist
     	For loop(for order of polylist)
@@ -158,13 +203,29 @@ polyList multiply(polylist, multiplier)
 }
 
 
-polyList divide(polylist, divider)
+//////////////////////////////////////////////////////
+// Name: polyDivide()
+// Purpose: Divides a polynomial by a double
+// Parameters: poly1 - pointer for the polynomial
+//             divider - number that divides the polynomial
+// Return: Polynomial that was divided
+///////////////////////////////////////////////////////
+
+polyList polyDivide(polylist, divider)
 {
 	For loop( for order of polylist)
             Polylist[i] / divider
     	Return
 }
 
+//////////////////////////////////////////////////////
+// Name: normalise()
+// Purpose: Adjusts coeffiecients so that the coefficient
+//          of highest order is 1
+// parameters: poly1 - pointer to the polynomial
+// Return: norm, the adjusted version of poly1 so
+// 	   coefficient of highest order is 1
+//////////////////////////////////////////////////////
 
 Polylist normalise(polylist)
 {
@@ -176,6 +237,14 @@ Polylist normalise(polylist)
 }
 
 
+/////////////////////////////////////////////////////
+// Name: order()
+// Purpose: Finds the highest power whos coefficient
+// 	    isnt 0
+// Parameters: poly1 - pointer to the polynomial
+// Return: highOrder, the most significant order
+/////////////////////////////////////////////////////
+
 Int order(polylist)
 {
     Int order
@@ -185,10 +254,17 @@ Int order(polylist)
 }
 
 
+////////////////////////////////////////////////////
+// Name: print()
+// Purpose: prints a polynomial to stdout
+// Parameters: poly1 - pointer to the polynomial
+// Return: The printed polynomial to the stdout
+////////////////////////////////////////////////////
+
 Void print(polylist)
 {
 	Prints first coefficient
 	For loop for remaining 
-	    Prints the remaining coefficients with respective order
+	    Prints the remaining coefficients with respective order to stdout
 }
 
