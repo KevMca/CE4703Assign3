@@ -91,7 +91,7 @@ int main()
 	  printf("Please select a polynomial to subract from another\n");
 	  polyPrintList(polyArray, polyArrayCounter);
 	  scanf("%d %d", &polyChoice1, &polyChoice2);
-	  polyArray[polyArrayCounter] = polyAdd(polyArray[polyChoice1 - 1], polyArray[polyChoice2 - 1]);
+	  polyArray[polyArrayCounter] = polySubtract(polyArray[polyChoice1 - 1], polyArray[polyChoice2 - 1]);
 	  polyPrint(polyArray[polyArrayCounter]);
 	  polyArrayCounter += 1;
 	  break;
@@ -101,7 +101,7 @@ int main()
 	  printf("Please select a polynomial and a constant to multiply together\n");
 	  polyPrintList(polyArray, polyArrayCounter);
 	  scanf("%d %lf", &polyChoice1, &constant);
-	  polyArray[polyArrayCounter] = multiply(polyArray[polyChoice1 - 1], constant);
+	  polyArray[polyArrayCounter] = polyMultiply(polyArray[polyChoice1 - 1], constant);
 	  polyPrint(polyArray[polyArrayCounter]);
 	  polyArrayCounter += 1;
 	  break;
@@ -111,7 +111,7 @@ int main()
 	  printf("Please select a polynomial and a constant to divide from it\n");
 	  polyPrintList(polyArray, polyArrayCounter);
 	  scanf("%d %lf", &polyChoice1, &constant);
-	  polyArray[polyArrayCounter] = divide(polyArray[polyChoice1 - 1], constant);
+	  polyArray[polyArrayCounter] = polyDivide(polyArray[polyChoice1 - 1], constant);
 	  polyPrint(polyArray[polyArrayCounter]);
 	  polyArrayCounter += 1;
 	  break;
@@ -133,6 +133,10 @@ int main()
 	  constant = polyOrder(polyArray[polyChoice1 - 1]);
 	  printf("The order of the polynomial chosen is %.0lf\n", constant);
 	  break;
+
+	case 10:
+	  printf("Closing Program\n");
+	  continueLoop = 0;
 	  
 	// ends loop, closes program
 	default:
