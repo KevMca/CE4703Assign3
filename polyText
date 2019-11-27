@@ -3,34 +3,39 @@
 
 int create(address of polylist, order of poly, array of coefficients)
 {
-    Create (order number + 1) of elements
-    For order:
-        addNode()
+	Create (order number + 1) of elements
+    	For order:
+            addNode()
 }
+
 
 int addNode()
 {
-    malloc
+	malloc
 }
 
-delete(address of polylist){
-   For loop
-        deleteNode()
+
+delete(address of polylist)
+{
+	For loop
+            deleteNode()
 }
+
 
 Int deleteNode()
 {
-    free
+	free
 }
 
-polyList add(polylist1, polylist2){
+polyList add(polylist1, polylist2)
+{
 	 If polylist1 >= polylist2
 	    Create polylist of size order+1
 	    For loop (for order of polylist 2)
     	    	Add all elements for smaller polylist
     	    For loop (for order of polylist 1 - polylist 2)
     		Add all elements to 0 for overflow
-	Else 
+	 Else 
             create polylist of size order+1
     	    For loop (for order of polylist 1)
     	    	Add all elements for smaller polylist
@@ -38,7 +43,8 @@ polyList add(polylist1, polylist2){
     	    	Add all elements to 0 for overflow
 }
 
-polyList subtract(polylist1, polylist2){
+polyList subtract(polylist1, polylist2)
+{
 	 If polylist1 >= polylist2
             Create polylist of size order+1
 	    For loop (for order of polylist 2)
@@ -51,4 +57,52 @@ polyList subtract(polylist1, polylist2){
     	     	 subtract all elements for smaller polylist
 	     For loop (for order of polylist 2 - polylist 1)
     	         Leave all elements as they are
+}
 
+polyList multiply(polylist, multiplier)
+{
+	Create polylist of size polylist
+    	For loop(for order of polylist)
+            Polylist[i] * multiplier
+    	Return 
+}
+
+
+polyList divide(polylist, divider)
+{
+	For loop( for order of polylist)
+            Polylist[i] / divider
+    	Return
+}
+
+
+Polylist normalise(polylist)
+{
+	 Order = order(polylist)
+    	 For loop of order(polylist) 
+    	     highCoeff = current value
+    	     polyList divide(polylist, highCoeff)
+    	 return
+}
+
+
+Int order(polylist)
+{
+    Int order
+    For order of the polylist 
+        If the element is non-zero
+            Order = order of element
+}
+
+
+Void print(polylist)
+{
+	Prints first coefficient
+	For loop for remaining 
+	    Prints the remaining coefficients with respective order
+}
+
+Kevin - create / delete
+Conor - add / subtract
+Stephen - multiply / divide
+Aaron - normalise / order / print
