@@ -1,8 +1,10 @@
 // main.c
 
-#include "polynomial.h"
+#include "Polynomial/polynomial.h"
+#include <stdlib.h>
+#include <stdio.h>
 
-polyList polyDeclare()
+polyList *polyDeclare()
 {
   polyList *poly;
   poly = polyCreate();
@@ -16,10 +18,10 @@ polyList polyDeclare()
 
   printf("Please enter the coefficients of the polynomial from least to most significant\n");
   for(int i = 0; i <= order; i++){
-    scanf("%i", coeff[i]);
+    scanf("%lf", &coeff[i]);
   }
 
-  fillPoly(&poly, order, coeff[]);
+  fillPoly(poly, order, coeff);
 
   return poly;
 }
@@ -27,7 +29,7 @@ polyList polyDeclare()
 int main()
 {
   int continueLoop = 1;
-  polyList polyArray[];
+  polyList polyArray[20];
   int polyArrayCounter = 0;
   
   while(continueLoop)
@@ -43,17 +45,7 @@ int main()
 	  break;
 
 	case 2:
-	  int order;
-	  printf("Please enter the order of the polynomial you would like to create: ");
-	  scanf("%d", order);
-	  double coeffArray[order+1];
-	  printf("Please enter the coefficients for the polynomial");
-	  for(int i = 0; i <= order; i++)
-	  {
-	    scanf("%lf", coeffArray[i]);
-	  }
 	  polyArray[polyArrayCounter] = polyDeclare();
-	  fillPoly(&polyArray[polyArrayCounter], order, coeffArray[]);
 	  polyArrayCounter += 1;
 	  break;
 
