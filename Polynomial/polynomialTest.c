@@ -13,6 +13,16 @@
 #include <stdlib.h>
 #include "polynomial.h"
 
+// Macros for printing if the function PASSED or FAILED
+#define passPrint(FUNC) printf("%s PASSED\n", #FUNC)
+#define failPrint(FUNC) printf("%s FAILED, check implementation\n", #FUNC)
+
+typedef enum {PASSED, FAILED} result;
+
+result testPolyCreate();
+result testFillPoly();
+result testNewCoeff();
+
 //////////////////////////////////////////////////
 // function main()
 // entry point from operating system. Defines 
@@ -21,84 +31,47 @@
 //////////////////////////////////////////////////
 int main(int argc, char **argv)
 {
-	int passed = 0;
   	/////////////////////////////////////////////////////////
   	// polynomial create and delete
   	/////////////////////////////////////////////////////////
 	
 	// Test polyCreate //////////////////////////////////////
-	passed = 0;
-
-	polyList *poly1 = polyCreate();
-	
-	// If next node from head is NULL it probably created properly
-	if(poly1->head->next == NULL)
+	if(testPolyCreate() == PASSED)
 	{
-		passed = 1;
+		printf("\npoly1 was not NULL\n");
+		passPrint(polyCreate());
 	}
-	if(passed == 1)
-		printf("\npoly1->head->next intitialised to NULL\n"
-			"polyCreate() PASSED\n");
 	else
-		printf("\npoly1->head->next not intitialised to NULL\n"
-			"polyCreate() FAILED, check implementation\n");
+	{
+		printf("\npoly1 was NULL\n");
+		failPrint(polyCreate());
+	}
 
 	// Test fillPoly ////////////////////////////////////////
-	passed = 0;
-
-	double arrFill[] = {0, 1, 2, 3};
-	fillPoly(poly1, 3, arrFill);
 	
-	// Reset the current cursor to be able to test
-	poly1->current = poly1->head;
-	// Test if each coefficient is correct
-	for(int i = 0; i <= 3; i++)
+	if(testFillPoly() == PASSED)
 	{
-		if(poly1->current->d.coefficient == arrFill[i] 
-			&& poly1->current->d.order == i)
-		{
-			passed = 1;
-			poly1->current = poly1->current->next;
-		}
-		else
-		{
-			passed = 0;
-			break;
-		}
+		printf("\nall coefficients were correct\n");
+		passPrint(fillPoly());
 	}
-	if(passed == 1)
-		printf("\nAll coefficients are correct\n"
-			"fillyPoly() PASSED\n");
 	else
-		printf("\nNot all coefficients are correct\n"
-			"fillyPoly() FAILED, check implementation\n");
+	{
+		printf("\nat least one coefficient was incorrect\n");
+		failPrint(fillPoly());
+	}
 
 	// Test newCoeff ////////////////////////////////////////
-	passed = 0;
-	int ord = 0;
-
-	// Reset current pointer and move to the end
-	poly1->current = poly1->head;
-	while(poly1->current->next != NULL)
-	{
-		poly1->current = poly1->current->next;
-		ord++;
-	}
-	// Add new coefficient to the end
-	poly1->current->next = newCoeff(10, ord + 1);
 	
-	// Test if the new coefficient was added on the end
-	poly1->current = poly1->current->next;
-	if(poly1->current->d.coefficient == 10 
-			&& poly1->current->d.order == ord + 1)
-		passed = 1;
-
-	if(passed == 1)
-		printf("\nAdded coefficient correctly\n"
-			"newCoeff() PASSED\n");
+	if(testNewCoeff() == PASSED)
+	{
+		printf("\nend coefficient and order was correct\n");
+		passPrint(newCoeff());
+	}
 	else
-		printf("\nDidn't add coefficient correctly\n"
-			"newCoeff() FAILED, check implementation\n");
+	{
+		printf("\nend coefficient or order was incorrect\n");
+		failPrint(newCoeff());
+	}
 
 	//polyDelete()
 	//deleteNext()
@@ -111,12 +84,12 @@ int main(int argc, char **argv)
   	//multiply()
   	
 	// Test divide //////////////////////////////////////////
-  	passed = 0;
+  	/*passed = 0;
 
   	// Test dividing by 2
   	polyList *polyD = polyDivide(poly1, 2);
 
-  	//
+  	// Reset current cursor to head
   	polyD->current = polyD->head;
   	for(int i = 0; i <= 3; i++)
 	{
@@ -137,7 +110,101 @@ int main(int argc, char **argv)
 			"polyDivide() PASSED\n");
 	else
 		printf("\nNot all coefficients are correct\n"
-			"polyDivide() FAILED, check implementation\n");
+			"polyDivide() FAILED, check implementation\n");*/
   	//polyNormalise()
   	//polyOrder()
+
+  	//Print new line for formatting
+  	printf("\n");
+}
+
+/////////////////////////////////////////////////////////
+// Test polyCreate
+/////////////////////////////////////////////////////////
+result testPolyCreate()
+{
+	// Run polyCreate
+	polyList *poly1 = polyCreate();
+	
+	// If next node from head is NULL it probably created properly
+	if(poly1 != NULL)
+	{
+		// Free poly1
+		polyDelete(poly1);
+		return PASSED;
+	}
+
+	// Else poly1 was NULL and didn't assign properly
+	return FAILED;
+}
+
+/////////////////////////////////////////////////////////
+// Test fillPoly
+/////////////////////////////////////////////////////////
+result testFillPoly()
+{
+	// Create polynomial
+	polyList *poly1 = polyCreate();
+	// Create arr to fill polynomial
+	double arrFill[] = {0, 1, 2, 3};
+	int order = 3;
+
+	// Run fillPoly
+	fillPoly(poly1, order, arrFill);
+	
+	// Reset the current cursor to be able to test
+	poly1->current = poly1->head;
+
+	// Test if each coefficient and order is correct
+	for(int i = 0; i <= order; i++)
+	{
+		if(poly1->current->d.coefficient == arrFill[i] 
+			&& poly1->current->d.order == i)
+		{
+			// Increment current cursor
+			poly1->current = poly1->current->next;
+		}
+		else
+		{
+			// Coefficient is incorrect
+			free(poly1);
+			return FAILED;
+		}
+	}
+
+	// All coefficients were correct
+	free(poly1);
+	return PASSED;
+}
+
+/////////////////////////////////////////////////////////
+// Test newCoeff
+/////////////////////////////////////////////////////////
+result testNewCoeff()
+{
+	// Create and fill new polynomial
+	polyList *poly1 = polyCreate();
+	// Create arr to fill polynomial
+	double arrFill[] = {0, 1, 2, 3};
+	int order = 3;
+	fillPoly(poly1, order, arrFill);
+
+	// Reset current pointer and move to the end
+	polyToEnd(poly1);
+	// Add new coefficient to the end
+	poly1->current->next = newCoeff(4, order + 1);
+	
+	// Test if the new coefficient was added on the end
+	polyToEnd(poly1);
+	if(poly1->current->d.coefficient == 4
+		&& poly1->current->d.order == order + 1)
+	{
+		// Coefficient and order of tail node were correct
+		free(poly1);
+		return PASSED;
+	}
+
+	// Either coefficient or order of tail were incorrect
+	free(poly1);
+	return FAILED;
 }
