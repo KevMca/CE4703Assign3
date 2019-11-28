@@ -317,7 +317,7 @@ polyList *polyMultiply(polyList *poly1, double multiplier)
                         (poly1->current->d.coefficient) * (multiplier);
 	
 	//Assign the remaining coefficients
-	for(int i = 0; i <= ord; i++)
+	for(int i = 1; i <= ord; i++)
 	{	
 		//create new node and move to that node
 		polyMul->current->next = newCoeff(0, i);
@@ -341,25 +341,33 @@ polyList *polyMultiply(polyList *poly1, double multiplier)
 
 polyList *polyDivide(polyList *poly1, double divider)
 {
-	polyList *polyDiv; //creates a new polynomial to use for division
+  polyPrint(poly1);
+  polyList *polyDiv; //creates a new polynomial to use for division
 	polyDiv = polyCreate();
 	int ord = polyOrder(poly1); //int ord is assigned the value of the order of the polynomial
-	//Assign head first
+  
+  // Reset current cursors
 	polyDiv->current = polyDiv->head;
+  poly1->current = poly1->head;
+  
+  //Assign head first
 	polyDiv->current->d.order = 0;
 	polyDiv->current->d.coefficient = 
 		(poly1->current->d.coefficient) / (divider);
-	//Assign the remaining coefficients
-	for(int i = 0; i <= ord; i++)
+	
+  //Assign the remaining coefficients
+	for(int i = 1; i <= ord; i++)
 	{	
-		//create new node and move to that node
-                polyDiv->current->next = newCoeff(0, i);
-                polyDiv->current = polyDiv->current->next;
-                
-                //value of current coefficient is multiped 
-                //by the double and stored in the new polynomial
-                polyDiv->current->d.coefficient = 
-                        (poly1->current->d.coefficient) / (divider);
+		  //create new node and move to that node
+      polyDiv->current->next = newCoeff(1, i);
+      polyDiv->current = polyDiv->current->next;
+      // Increment poly1 as well
+      poly1->current = poly1->current->next;
+
+      //value of current coefficient is multiped 
+      //by the double and stored in the new polynomial
+      polyDiv->current->d.coefficient = 
+              (poly1->current->d.coefficient) / (divider);
 	}
 	return polyDiv; //returns the divided polynomial 
 }
@@ -400,18 +408,29 @@ polyList *polyNormalise(polyList *poly1)
 
 int polyOrder(polyList *poly1)
 {
-  int highOrder; // variable to store highest order in polyList
+  // Variable to store highest order in polyList
+  int highOrder;
+  // Reset current to head
   poly1->current = poly1->head;
-  for(int i=0; i <= (poly1->order); i ++) // for loop from 0 to length of polylist 
+
+  // Do while you haven't reached the end
+  int i = 0;
+  do
   {
-      if(poly1->current->d.coefficient !=0) // if poly1's coefficient is not equal to 0 
+      // If poly1's coefficient is not equal to 0 
+      if(poly1->current->d.coefficient !=0)
       {
-	  highOrder = i; // length is highest order that is not equal to 0
+         // Length is highest order that is not equal to 0
+	       highOrder = i;
       } 
-      poly1->current = poly1->current->next; // sets current to next value
-  }
+      // Set current to next value
+      poly1->current = poly1->current->next;
+      i++;
+  } while(poly1->current != NULL);
+
+  // Reset current to head and return
   poly1->current = poly1->head;
-  return highOrder; // returns most significant order
+  return highOrder;
 }
 
 ////////////////////////////////////////////////////
