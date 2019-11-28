@@ -1,7 +1,7 @@
 ///////////////////////////////////////////////////////////////////////
 // polyText.txt                                                      //
 // author: Stephen Gannon, Kevin McAndrew, Conor Pesch, Aaron Naylor //
-// date: 27/11/19                                                    //
+// date: 28/11/19                                                    //
 // purpose: Contains an explanation of designed data type,           //
 //   	    specifications and pseudo-code for                       //
 //          all operations                                           //
@@ -310,12 +310,14 @@ Polylist polyNormalise(polylist)
 // Return: highOrder, the most significant order
 /////////////////////////////////////////////////////
 
-Int polyOrder(polylist)
+int polyOrder(polylist)
 {
-    Int order
-    For order of the polylist 
-        If the element is non-zero
-            Order = order of element
+    int order
+    do 
+      	If the element is non-zero
+           Order = order of element
+    while current != NULL
+    return
 }
 
 
