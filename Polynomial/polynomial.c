@@ -7,6 +7,9 @@
 
 #include "polynomial.h"
 
+// incrementCursor(number of steps)
+// gototail
+
 ///////////////////////////////////////////////////
 // Name: polyCreate()
 // Purpose: Creates and empty polynomial, head points
@@ -443,14 +446,19 @@ polyList *polyDivide(polyList *poly1, double divider)
 // 	   coefficient of highest order is 1
 //////////////////////////////////////////////////////
 
-
 polyList *polyNormalise(polyList *poly1)
 {
-  polyList *norm; // variable to store value before returned
-  double highCoeff; // stores coefficient of highest order
-  int order = polyOrder(poly1); // calls order function to find highest order
-  poly1->current = poly1->head;
-  for(int i =0; i < order; i++) // for loop from 0 to order in increments of 1
+  // Set up variables for result and highest coefficient
+  polyList *norm;
+  double highCoeff;
+  // Find order of polynomial
+  int order = polyOrder(poly1);
+
+  // Reset current cursor to head
+  polyToHead(poly1);
+
+  // 
+  for(int i = 0; i < order; i++)
   {
       poly1->current = poly1->current->next; // sets current to next value
   }
@@ -499,21 +507,35 @@ int polyOrder(polyList *poly1)
 // Name: polyPrint()
 // Purpose: prints a polynomial to stdout
 // Parameters: poly1 - pointer to the polynomial
-// Return: The printed polynomial to the stdout
+// Return: If there was an error
 ////////////////////////////////////////////////////
 
-void polyPrint(polyList *poly1)
+polyError polyPrint(polyList *poly1)
 {  
-  int order = polyOrder(poly1); // get highest order that coefficient isn't 0
-  poly1->current = poly1->head; // set current to first element
-  fprintf(stdout, "%.3lf", (poly1->current->d.coefficient)); // prints first element
-  poly1->current = poly1->current->next; // sets current to next number 
+  // Report null polynomial
+  if(poly1 == NULL)
+    return nullPoly;
+
+  // Get order of polynomial
+  int order = polyOrder(poly1);
+  // Reset current cursor to head
+  polyToHead(poly1);
   
+  // Print constant coefficient first
+  fprintf(stdout, "%.3lf", (poly1->current->d.coefficient));
+  // Increment the current cursor
+  poly1->current = poly1->current->next;
+  
+  // Repeat print for the remaining elements
   for(int i = 1; i <= order; i ++) // for loop from 0 to highest order
   {
-    fprintf(stdout, " + %.3lfx^%d", poly1->current->d.coefficient, i); // prints coefficient polynominal starting at least significant
-      poly1->current = poly1->current->next; // sets current to next number 
+      fprintf(stdout, " + %.3lfx^%d", poly1->current->d.coefficient, i);
+      // Increment the current cursor
+      poly1->current = poly1->current->next;
   }
+
   // Print new line
-  fprintf(stdout, "\n\n");
+  fprintf(stdout, "\n");
+
+  return ok;
 }
