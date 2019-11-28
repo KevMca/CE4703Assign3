@@ -22,4 +22,4 @@ polynomialTest: polynomialTest.c polynomial.o
 .PHONY: clean
 clean:
 	rm -f -r *.dSYM
-	rm -f *.o polynomialTest* *~
+	rm -f *.o polynomialTest* polynomialMain* *~

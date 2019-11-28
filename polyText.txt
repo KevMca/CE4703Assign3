@@ -17,15 +17,12 @@
 ////////////////////////////////////////////////////
 // polyList is the data type made for the polynomial.
 // It contains a polyNode type for head and current.
-// It also contains an int order which represents the
-// order of the polynomial.
 ////////////////////////////////////////////////////
 
 typedef struct
 {
     polyNode *head;
     polyNode *current;
-    Int order;
 } polyList;    
 
 

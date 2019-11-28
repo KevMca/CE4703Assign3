@@ -12,7 +12,6 @@
 typedef struct
 {
   	double coefficient; // Coefficient for order
-	int order; // Position in polynomial (x^order)
 } polyData;
 
 typedef struct n
