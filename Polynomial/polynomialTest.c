@@ -11,19 +11,36 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "polynomial.h"
 
-// Macros for printing if the function PASSED or FAILED
-#define passPrint(FUNC) printf("%s PASSED\n", #FUNC)
-#define failPrint(FUNC) printf("%s FAILED, check implementation\n", #FUNC)
-
+// Enum for either PASSED or FAILED
 typedef enum {PASSED, FAILED} result;
 
+// Test functions that test each individual function
 result testPolyCreate();
+result testPolyToHead();
+result testPolyToEnd();
 result testFillPoly();
 result testNewCoeff();
 result testDeleteNext();
 result testPolyDelete();
+
+// Custom general unit testing that takes reasons for passing or failing,
+// the function name and a pointer to the function to run
+void test(char *passReason, char *failReason, char *funcName, result (*f)(void))
+{
+	if((*f)() == PASSED)
+	{
+		printf("\n%s\n", passReason);
+		printf("%s PASSED\n", funcName);
+	}
+	else
+	{
+		printf("\n%s\n", failReason);
+		printf("%s FAILED, check implementation\n", funcName);
+	}
+}
 
 //////////////////////////////////////////////////
 // function main()
@@ -34,68 +51,50 @@ result testPolyDelete();
 int main(int argc, char **argv)
 {
   	/////////////////////////////////////////////////////////
-  	// polynomial create and delete
+  	// polynomial functions
   	/////////////////////////////////////////////////////////
 	
 	// Test polyCreate //////////////////////////////////////
-	if(testPolyCreate() == PASSED)
-	{
-		printf("\npoly1 was not NULL\n");
-		passPrint(polyCreate());
-	}
-	else
-	{
-		printf("\npoly1 was NULL\n");
-		failPrint(polyCreate());
-	}
+	test("poly1 was not NULL", 
+		"poly1 was NULL", 
+		"polyCreate()", 
+		testPolyCreate);
+
+	// Test polyToHead //////////////////////////////////////
+	test("current cursor moved to head", 
+		"current cursor didn't move to head", 
+		"polyToHead()", 
+		testPolyToHead);
+
+	// Test polyToEnd //////////////////////////////////////
+	test("current cursor moved to end", 
+		"current cursor didn't move to end", 
+		"polyToEnd()", 
+		testPolyToEnd);
 
 	// Test fillPoly ////////////////////////////////////////
-	if(testFillPoly() == PASSED)
-	{
-		printf("\nall coefficients were correct\n");
-		passPrint(fillPoly());
-	}
-	else
-	{
-		printf("\nat least one coefficient was incorrect\n");
-		failPrint(fillPoly());
-	}
+	test("all coefficients were correct", 
+		"at least one coefficient was incorrect", 
+		"fillPoly()", 
+		testFillPoly);
 
 	// Test newCoeff ////////////////////////////////////////
-	if(testNewCoeff() == PASSED)
-	{
-		printf("\nend coefficient and order was correct\n");
-		passPrint(newCoeff());
-	}
-	else
-	{
-		printf("\nend coefficient or order was incorrect\n");
-		failPrint(newCoeff());
-	}
+	test("end coefficient and order was correct", 
+		"end coefficient or order was incorrect", 
+		"newCoeff()", 
+		testNewCoeff);
 
 	// Test deleteNext //////////////////////////////////////
-	if(testDeleteNext() == PASSED)
-	{
-		printf("\ndeleted with no errors\n");
-		passPrint(deleteNext());
-	}
-	else
-	{
-		printf("\nreturned node error\n");
-		failPrint(deleteNext());
-	}
+	test("deleted with no errors", 
+		"returned node error", 
+		"deleteNext()", 
+		testDeleteNext);
 
 	// Test polyDelete //////////////////////////////////////
-	if(testPolyDelete() == PASSED)
-	{
-		printf("\ndeleted with no errors\n");
-		passPrint(polyDelete());
-	}
-	else
-	{
-		printf("\nreturned node error\n");
-		failPrint(polyDelete());
-	}
+	test("deleted with no errors", 
+		"returned node error", 
+		"polyDelete()", 
+		testPolyDelete);
 
 	/////////////////////////////////////////////////////////
   	// polynomial operations
@@ -162,10 +161,53 @@ result testPolyCreate()
 /////////////////////////////////////////////////////////
 // Test polyToHead
 /////////////////////////////////////////////////////////
+result testPolyToHead()
+{
+	// Create new polynomial and add node
+	polyList *poly1 = polyCreate();
+	poly1->current->next = newCoeff(0, 1);
+
+	// Increment current to see if it will return to head
+	poly1->current = poly1->current->next;
+
+	// Run polyToHead
+	polyToHead(poly1);
+
+	if(poly1->current == poly1->head)
+	{
+		// Successfully moved current cursor to head
+		free(poly1);
+		return PASSED;
+	}
+
+	// Current cursor is not the same as head
+	free(poly1);
+	return FAILED;
+}
 
 /////////////////////////////////////////////////////////
 // Test polyToEnd
 /////////////////////////////////////////////////////////
+result testPolyToEnd()
+{
+	// Create new polynomial and add node
+	polyList *poly1 = polyCreate();
+	poly1->current->next = newCoeff(0, 1);
+
+	// Run polyToHead
+	polyToEnd(poly1);
+
+	if(poly1->current == poly1->head->next)
+	{
+		// Successfully moved current cursor to end
+		free(poly1);
+		return PASSED;
+	}
+
+	// Current cursor is not the same as end
+	free(poly1);
+	return FAILED;
+}
 
 /////////////////////////////////////////////////////////
 // Test fillPoly
