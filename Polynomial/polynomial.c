@@ -317,7 +317,7 @@ polyList *polyMultiply(polyList *poly1, double multiplier)
                         (poly1->current->d.coefficient) * (multiplier);
 	
 	//Assign the remaining coefficients
-	for(int i = 1; i <= ord; i++)
+	for(int i = 0; i <= ord; i++)
 	{	
 		//create new node and move to that node
 		polyMul->current->next = newCoeff(0, i);
@@ -350,7 +350,7 @@ polyList *polyDivide(polyList *poly1, double divider)
 	polyDiv->current->d.coefficient = 
 		(poly1->current->d.coefficient) / (divider);
 	//Assign the remaining coefficients
-	for(int i = 1; i <= ord; i++)
+	for(int i = 0; i <= ord; i++)
 	{	
 		//create new node and move to that node
                 polyDiv->current->next = newCoeff(0, i);
