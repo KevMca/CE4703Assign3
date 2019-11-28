@@ -242,7 +242,7 @@ polyList *polyAdd(polyList *poly1, polyList *poly2)
     poly3->current->d.coefficient = poly1->current->d.coefficient + poly2->current->d.coefficient;
     poly1->current = poly1->current->next;
     poly2->current = poly2->current->next;
-    poly3->current->next = newCoeff(0, i);
+    poly3->current->next = newCoeff(0, i + 1);
     poly3->current = poly3->current->next;
   }
 
@@ -253,7 +253,7 @@ polyList *polyAdd(polyList *poly1, polyList *poly2)
     {
       poly3->current->d.coefficient = poly1->current->d.coefficient;
       poly1->current = poly1->current->next;
-      poly3->current->next = newCoeff(0, i);
+      poly3->current->next = newCoeff(0, i + 1);
       poly3->current = poly3->current->next;
     }
     poly3->current->d.coefficient = poly1->current->d.coefficient; // final assign, doesn't make a new node
@@ -264,7 +264,7 @@ polyList *polyAdd(polyList *poly1, polyList *poly2)
     {
       poly3->current->d.coefficient = poly2->current->d.coefficient;
       poly2->current = poly2->current->next;
-      poly3->current->next = newCoeff(0, i);
+      poly3->current->next = newCoeff(0, i + 1);
       poly3->current = poly3->current->next;
     }
     poly3->current->d.coefficient = poly2->current->d.coefficient;
@@ -313,7 +313,7 @@ polyList *polySubtract(polyList *poly1, polyList *poly2)
     poly3->current->d.coefficient = poly1->current->d.coefficient - poly2->current->d.coefficient;
     poly1->current = poly1->current->next;
     poly2->current = poly2->current->next;
-    poly3->current->next = newCoeff(0, i);
+    poly3->current->next = newCoeff(0, i + 1);
     poly3->current = poly3->current->next;
   }
 
@@ -326,7 +326,7 @@ polyList *polySubtract(polyList *poly1, polyList *poly2)
     {
       poly3->current->d.coefficient = poly1->current->d.coefficient;
       poly1->current = poly1->current->next;
-      poly3->current->next = newCoeff(0, i);
+      poly3->current->next = newCoeff(0, i + 1);
       poly3->current = poly3->current->next;
     }
     poly3->current->d.coefficient = poly1->current->d.coefficient;
@@ -337,7 +337,7 @@ polyList *polySubtract(polyList *poly1, polyList *poly2)
     {
       poly3->current->d.coefficient = 0 - poly2->current->d.coefficient;
       poly2->current = poly2->current->next;
-      poly3->current->next = newCoeff(0, i);
+      poly3->current->next = newCoeff(0, i + 1);
       poly3->current = poly3->current->next;
     }
     poly3->current->d.coefficient = 0 - poly2->current->d.coefficient;
@@ -361,25 +361,32 @@ polyList *polyMultiply(polyList *poly1, double multiplier)
 	polyList *polyMul; //creates a new polynomial to use for multiplication
 	polyMul = polyCreate();
 	int ord = polyOrder(poly1); //int ord is assigned the value of the order of the polynomial
-	//Assign head first
-	polyMul->current = polyMul->head;
-	polyMul->current->d.order = 0;
-	polyMul->current->d.coefficient = 
-                        (poly1->current->d.coefficient) * (multiplier);
+	// Reset cursors to head
+	polyToHead(polyMul);
+  polyToHead(poly1);
 	
 	//Assign the remaining coefficients
-	for(int i = 1; i <= ord; i++)
+	for(int i = 0; i < ord; i++)
 	{	
-		//create new node and move to that node
-		polyMul->current->next = newCoeff(0, i);
-		polyMul->current = polyMul->current->next;
-		
 		//value of current coefficient is multiped 
-                //by the double and stored in the new polynomial
+    //by the double and stored in the new polynomial
 		polyMul->current->d.coefficient = 
 			(poly1->current->d.coefficient) * (multiplier);
+
+    //create new node and move to that node
+    polyMul->current->next = newCoeff(0, i + 1);
+    polyMul->current = polyMul->current->next;
+    poly1->current = poly1->current->next;
 	}
-	return polyMul; //returns the multipied polynomial
+  // Do not create new node, because it is at the end
+  polyMul->current->d.coefficient = 
+      (poly1->current->d.coefficient) * (multiplier);
+
+  // Reset cursors to head
+  polyToHead(polyMul);
+  polyToHead(poly1);
+  // Return polynomial multiplied by multiplier
+	return polyMul;
 }
 
 //////////////////////////////////////////////////////
