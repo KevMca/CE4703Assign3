@@ -25,4 +25,4 @@ polyOpTest: polyOpTest.c polynomial.o
 .PHONY: clean
 clean:
 	rm -f -r *.dSYM
-	rm -f *.o polynomialTest* polynomialMain* *~
+	rm -f *.o polyFuncTest* polyOpTest* polynomialMain* *~
