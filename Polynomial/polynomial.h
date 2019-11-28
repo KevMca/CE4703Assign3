@@ -12,6 +12,7 @@
 typedef struct
 {
   	double coefficient; // Coefficient for order
+  	int order; // Order of coefficient in polynomial
 } polyData;
 
 typedef struct n
@@ -25,7 +26,6 @@ typedef struct
 {
   	polyNode *head; // Head of the polynomial
   	polyNode *current; // Current node cursor
-  	int order; // Order of the coefficient
 } polyList;
 
 // Polynomial editing operation
