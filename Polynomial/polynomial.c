@@ -56,7 +56,7 @@ polyList *polyCreate()
 int fillPoly(polyList *poly, int order, double arr[])
 {
     // Fill polyList parameters
-    poly->order = order;
+    poly->current->d.order = order;
     
     // Assign head coefficient first
     poly->current = poly->head;
