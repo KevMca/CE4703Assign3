@@ -151,6 +151,7 @@ int main()
 	case 10:
 	  printf("Closing Program\n");
 	  continueLoop = 0;
+	  break;
 	  
 	// ends loop, closes program
 	default:
