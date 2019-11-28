@@ -20,6 +20,7 @@ result testPolyCreate();
 result testPolyToHead();
 result testPolyToTail();
 result testPolyToEnd();
+result testPolyIncrement();
 result testFillPoly();
 result testNewCoeff();
 result testDeleteNext();
@@ -76,6 +77,12 @@ int main(int argc, char **argv)
 		"current cursor didn't move to end", 
 		"polyToEnd()", 
 		testPolyToEnd);
+
+	// Test polyIncrement //////////////////////////////////
+	test("cursor incremented correct number of steps", 
+		"current cursor didn't increment correctly", 
+		"polyIncrement()", 
+		testPolyIncrement);
 
 	// Test fillPoly ////////////////////////////////////////
 	test("all coefficients were correct", 
@@ -199,6 +206,37 @@ result testPolyToEnd()
 
 	// Current cursor is not the same as end
 	printf("\n%d", polyOrder(poly1));
+	polyDelete(poly1);
+	return FAILED;
+}
+
+/////////////////////////////////////////////////////////
+// Test polyIncrement
+/////////////////////////////////////////////////////////
+result testPolyIncrement()
+{
+	// Create polynomial
+	polyList *poly1 = polyCreate();
+	// Create arr to fill polynomial
+	double arrFill[] = {0, 1, 2, 3};
+	int order = 3;
+	// Run fillPoly
+	fillPoly(poly1, order, arrFill);
+
+	// Reset current to head
+	polyToHead(poly1);
+	// Run polyIncrement
+	polyIncrement(poly1, 2);
+
+	if(poly1->current->d.coefficient == 2
+		&& poly1->current->d.order == 2)
+	{
+		// Incremented correctly
+		polyDelete(poly1);
+		return PASSED;
+	}
+
+	// Incremented incorrectly
 	polyDelete(poly1);
 	return FAILED;
 }

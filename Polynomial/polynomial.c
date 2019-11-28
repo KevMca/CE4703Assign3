@@ -8,7 +8,6 @@
 #include "polynomial.h"
 
 // incrementCursor(number of steps)
-// gototail
 
 ///////////////////////////////////////////////////
 // Name: polyCreate()
@@ -109,6 +108,28 @@ polyError polyToEnd(polyList *poly)
   // While next isn't equal to NULL increment the current
   for(int i = 0; i < order; i++)
   {
+    poly->current = poly->current->next;
+  }
+
+  return ok;
+}
+
+///////////////////////////////////////////////////////
+// Name: polyIncrement()
+// Purpose: Increments the current cursor by a defined
+//          number of steps
+// Parameters:  poly - pointer to polynomial
+//              steps - number of steps to increment by
+// Return: if there was an error
+///////////////////////////////////////////////////////
+polyError polyIncrement(polyList *poly, int steps)
+{
+  // Increment current cursor the number of times specified
+  for(int i = 0; i < steps; i++)
+  {
+    // If the end has been reached, report node error
+    if(poly->current->next == NULL)
+      return nodeErr;
     poly->current = poly->current->next;
   }
 
