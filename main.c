@@ -155,8 +155,7 @@ int main()
 	  
 	// ends loop, closes program
 	default:
-	  printf("Invalid choice. Closing Program\n");
-	  continueLoop = 0;
+	  printf("Invalid choice. Try another\n");
 	  break;
 	}
     }
