@@ -1,8 +1,8 @@
 /////////////////////////////////////////////////////////////
-// PolyText                                                //
+// polyText.txt                                            //
 // author: Stephen Gannon                                  //
 // date: 27/11/19                                          //
-// purpose: Contains and explanation of designed data type,//
+// purpose: Contains an explanation of designed data type, //
 //   	    specifications and pseudo-code for             //
 //          all operations                                 //
 /////////////////////////////////////////////////////////////
@@ -34,7 +34,7 @@ typedef struct
 // the polyList.
 // It contains the polyData data type which contains
 // information on each node.
-// It also contains an address to the next node.
+// It also contains the address of the next node.
 ///////////////////////////////////////////////////
 
 typedef struct
@@ -49,7 +49,7 @@ typedef struct
 // information within each node.
 // It contains a double coefficient for each term
 // and int order which is the order of the
-// polynomial.
+// coefficient.
 ///////////////////////////////////////////////////
 
 typedef struct
