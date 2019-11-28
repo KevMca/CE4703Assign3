@@ -22,6 +22,8 @@ typedef enum {PASSED, FAILED} result;
 result testPolyCreate();
 result testFillPoly();
 result testNewCoeff();
+result testDeleteNext();
+result testPolyDelete();
 
 //////////////////////////////////////////////////
 // function main()
@@ -48,7 +50,6 @@ int main(int argc, char **argv)
 	}
 
 	// Test fillPoly ////////////////////////////////////////
-	
 	if(testFillPoly() == PASSED)
 	{
 		printf("\nall coefficients were correct\n");
@@ -61,7 +62,6 @@ int main(int argc, char **argv)
 	}
 
 	// Test newCoeff ////////////////////////////////////////
-	
 	if(testNewCoeff() == PASSED)
 	{
 		printf("\nend coefficient and order was correct\n");
@@ -73,8 +73,29 @@ int main(int argc, char **argv)
 		failPrint(newCoeff());
 	}
 
-	//polyDelete()
-	//deleteNext()
+	// Test deleteNext //////////////////////////////////////
+	if(testDeleteNext() == PASSED)
+	{
+		printf("\ndeleted with no errors\n");
+		passPrint(deleteNext());
+	}
+	else
+	{
+		printf("\nreturned node error\n");
+		failPrint(deleteNext());
+	}
+
+	// Test polyDelete //////////////////////////////////////
+	if(testPolyDelete() == PASSED)
+	{
+		printf("\ndeleted with no errors\n");
+		passPrint(polyDelete());
+	}
+	else
+	{
+		printf("\nreturned node error\n");
+		failPrint(polyDelete());
+	}
 
 	/////////////////////////////////////////////////////////
   	// polynomial operations
@@ -137,6 +158,14 @@ result testPolyCreate()
 	// Else poly1 was NULL and didn't assign properly
 	return FAILED;
 }
+
+/////////////////////////////////////////////////////////
+// Test polyToHead
+/////////////////////////////////////////////////////////
+
+/////////////////////////////////////////////////////////
+// Test polyToEnd
+/////////////////////////////////////////////////////////
 
 /////////////////////////////////////////////////////////
 // Test fillPoly
@@ -206,5 +235,47 @@ result testNewCoeff()
 
 	// Either coefficient or order of tail were incorrect
 	free(poly1);
+	return FAILED;
+}
+
+/////////////////////////////////////////////////////////
+// Test deleteNext
+/////////////////////////////////////////////////////////
+result testDeleteNext()
+{
+	// Create new polynomial and add node
+	polyList *poly1 = polyCreate();
+	poly1->current->next = newCoeff(0, 1);
+
+	// Delete new node
+	if(deleteNext(poly1->current) == ok)
+	{
+		// Deleted next node without any errors
+		free(poly1);
+		return PASSED;
+	}
+
+	// Returned a node error
+	free(poly1);
+	return FAILED;
+}
+
+/////////////////////////////////////////////////////////
+// Test polyDelete
+/////////////////////////////////////////////////////////
+result testPolyDelete()
+{
+	// Create new polynomial and add node
+	polyList *poly1 = polyCreate();
+	poly1->current->next = newCoeff(0, 1);
+
+	// Delete polynomial
+	if(polyDelete(poly1) == ok)
+	{
+		// Deleted polynomial without any errors
+		return PASSED;
+	}
+
+	// Returned a node error
 	return FAILED;
 }
