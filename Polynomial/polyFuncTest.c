@@ -136,12 +136,12 @@ result testPolyToHead()
 	if(poly1->current == poly1->head)
 	{
 		// Successfully moved current cursor to head
-		free(poly1);
+		polyDelete(poly1);
 		return PASSED;
 	}
 
 	// Current cursor is not the same as head
-	free(poly1);
+	polyDelete(poly1);
 	return FAILED;
 }
 
@@ -160,12 +160,12 @@ result testPolyToEnd()
 	if(poly1->current == poly1->head->next)
 	{
 		// Successfully moved current cursor to end
-		free(poly1);
+		polyDelete(poly1);
 		return PASSED;
 	}
 
 	// Current cursor is not the same as end
-	free(poly1);
+	polyDelete(poly1);
 	return FAILED;
 }
 
@@ -198,13 +198,13 @@ result testFillPoly()
 		else
 		{
 			// Coefficient is incorrect
-			free(poly1);
+			polyDelete(poly1);
 			return FAILED;
 		}
 	}
 
 	// All coefficients were correct
-	free(poly1);
+	polyDelete(poly1);
 	return PASSED;
 }
 
@@ -231,12 +231,12 @@ result testNewCoeff()
 		&& poly1->current->d.order == order + 1)
 	{
 		// Coefficient and order of tail node were correct
-		free(poly1);
+		polyDelete(poly1);
 		return PASSED;
 	}
 
 	// Either coefficient or order of tail were incorrect
-	free(poly1);
+	polyDelete(poly1);
 	return FAILED;
 }
 
@@ -253,12 +253,12 @@ result testDeleteNext()
 	if(deleteNext(poly1->current) == ok)
 	{
 		// Deleted next node without any errors
-		free(poly1);
+		polyDelete(poly1);
 		return PASSED;
 	}
 
 	// Returned a node error
-	free(poly1);
+	polyDelete(poly1);
 	return FAILED;
 }
 
