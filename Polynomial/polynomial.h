@@ -28,17 +28,23 @@ typedef struct
   	polyNode *current; // Current node cursor
 } polyList;
 
+typedef enum {ok, memoryErr, nodeErr, nullPoly} polyError;
+
 // Polynomial editing operation
 // Creates an empty polynomial
 polyList *polyCreate();
+// Moves current cursor to head
+polyError polyToHead(polyList *poly);
+// Moves current cursor to tail
+polyError polyToEnd(polyList *poly);
 // Fills a polynomial with coefficients
-int fillPoly(polyList *poly, int order, double arr[]);
+polyError fillPoly(polyList *poly, int order, double arr[]);
 // Adds a coefficient to a polynomial
 polyNode *newCoeff(double coefficient, int order);
 // Deletes a polynomial
-int polyDelete(polyList *poly);
+polyError polyDelete(polyList *poly);
 // Deletes a polynomial coefficient
-int deleteNext(polyNode *current);
+polyError deleteNext(polyNode *current);
 
 // Polynomial operations
 // Adds two polynomials together
