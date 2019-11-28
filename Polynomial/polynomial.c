@@ -361,7 +361,8 @@ polyList *polyMultiply(polyList *poly1, double multiplier)
 	polyList *polyMul; //creates a new polynomial to use for multiplication
 	polyMul = polyCreate();
 	int ord = polyOrder(poly1); //int ord is assigned the value of the order of the polynomial
-	// Reset cursors to head
+	
+  // Reset cursors to head
 	polyToHead(polyMul);
   polyToHead(poly1);
 	
@@ -376,6 +377,7 @@ polyList *polyMultiply(polyList *poly1, double multiplier)
     //create new node and move to that node
     polyMul->current->next = newCoeff(0, i + 1);
     polyMul->current = polyMul->current->next;
+    // Increment poly1 as well
     poly1->current = poly1->current->next;
 	}
   // Do not create new node, because it is at the end
@@ -404,29 +406,32 @@ polyList *polyDivide(polyList *poly1, double divider)
 	int ord = polyOrder(poly1); //int ord is assigned the value of the order of the polynomial
   
   // Reset current cursors
-	polyDiv->current = polyDiv->head;
-  poly1->current = poly1->head;
-  
-  //Assign head first
-	polyDiv->current->d.order = 0;
-	polyDiv->current->d.coefficient = 
-		(poly1->current->d.coefficient) / (divider);
+	polyToHead(polyDiv);
+  polyToHead(poly1);
 	
   //Assign the remaining coefficients
-	for(int i = 1; i <= ord; i++)
+	for(int i = 0; i < ord; i++)
 	{	
-		  //create new node and move to that node
-      polyDiv->current->next = newCoeff(1, i);
-      polyDiv->current = polyDiv->current->next;
-      // Increment poly1 as well
-      poly1->current = poly1->current->next;
-
       //value of current coefficient is multiped 
       //by the double and stored in the new polynomial
       polyDiv->current->d.coefficient = 
               (poly1->current->d.coefficient) / (divider);
+
+      //create new node and move to that node
+      polyDiv->current->next = newCoeff(0, i + 1);
+      polyDiv->current = polyDiv->current->next;
+      // Increment poly1 as well
+      poly1->current = poly1->current->next;
 	}
-	return polyDiv; //returns the divided polynomial 
+  // Do not create new node, because it is at the end
+  polyDiv->current->d.coefficient = 
+      (poly1->current->d.coefficient) / (divider);
+
+  // Reset current cursors
+  polyToHead(polyDiv);
+  polyToHead(poly1);
+  // Return polynomial divided by divisor
+	return polyDiv;
 }
 
 //////////////////////////////////////////////////////
