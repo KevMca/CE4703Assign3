@@ -71,8 +71,6 @@ polyError polyToEnd(polyList *poly)
 {
   if(poly != NULL)
   {
-    // Reset to current to head
-    polyToHead(poly);
     // While next isn't equal to NULL increment the current
     while(poly->current->next != NULL)
     {
