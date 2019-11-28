@@ -20,7 +20,7 @@ polyFuncTest: polyFuncTest.c polynomial.o
 	gcc -Wall -ggdb -o $@ $^
 
 polyOpTest: polyOpTest.c polynomial.o
-        gcc -Wall -ggdb -o $@ $^
+	gcc -Wall -ggdb -o $@ $^
 
 .PHONY: clean
 clean:
