@@ -57,7 +57,7 @@ void polyPrintList(polyList *polyArray[], int polyArrayCounter)
 int main()
 {
   int continueLoop = 1;
-  polyList *polyArray[20];
+  polyList *polyArray[100];
   int polyArrayCounter = 0;
 
   int polyChoice1, polyChoice2;
