@@ -1,17 +1,15 @@
 /////////////////////////////////////////////////////////
-// polynomialTest.c
+// polyFuncTest.c
 //
-// main test program for testing Polynomial module and its
-// functions. Also gives example implementations to
-// demonstrate how the module works
+// main test program for testing Polynomial functions for
+// creating, deleting and modifying polynomials
 //
 // author:      kevin mcandrew
-// date:        27.11.2019
+// date:        28.11.2019
 /////////////////////////////////////////////////////////
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
 #include "polynomial.h"
 
 // Enum for either PASSED or FAILED
