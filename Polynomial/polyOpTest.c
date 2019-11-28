@@ -122,7 +122,7 @@ result testPolyAdd()
 	for(int i = 0; i <=order; i++)
 	{
 		if(poly3->current->d.coefficient != arrFill1[i] + arrFill2[i]
-			|| poly->current->d.order != i)
+			|| poly3->current->d.order != i)
 		{
 			// Coefficient not as expected
 			free(poly1);
