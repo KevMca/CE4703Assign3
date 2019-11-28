@@ -7,16 +7,19 @@ vpath %.h $(POLYNOMIAL)
 
 # Make all
 .PHONY: all
-all: polynomialTest PolynomialMain
+all: polyAll
 	./PolynomialMain
 
-PolynomialMain: polynomial.o main.c
+polyAll: PolynomialMain.o polynomial.o polynomialTest.o
+	gcc -o $@ $^
+
+PolynomialMain.o: polynomial.o main.c
 	gcc -Wall -ggdb -o $@ $^
 
 polynomial.o: polynomial.c polynomial.h
 	gcc -Wall -ggdb -c $<
 
-polynomialTest: polynomialTest.c polynomial.o
+polynomialTest.o: polynomialTest.c polynomial.o
 	gcc -Wall -ggdb -o $@ $^
 
 .PHONY: clean
