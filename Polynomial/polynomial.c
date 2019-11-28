@@ -43,6 +43,46 @@ polyList *polyCreate()
     return poly;
 }
 
+///////////////////////////////////////////////////////
+// Name: polyToHead()
+// Purpose: Moves current cursor to the end of the head
+// Parameters:  poly - pointer to the polynomial
+// Return: if there was an error
+///////////////////////////////////////////////////////
+polyError polyToHead(polyList *poly)
+{
+  if(poly != NULL)
+    poly->current = poly->head;
+  else
+    return nullPoly;
+
+  return ok;
+}
+
+///////////////////////////////////////////////////////
+// Name: polyToend()
+// Purpose: Moves current cursor to the end of the polynomial
+// Parameters:  poly - pointer to polynomial
+// Return: if there was an error
+///////////////////////////////////////////////////////
+polyError polyToEnd(polyList *poly)
+{
+  if(poly != NULL)
+  {
+    // Reset to current to head
+    polyToHead(poly);
+    // While next isn't equal to NULL increment the current
+    while(poly->current->next != NULL)
+    {
+      poly->current = poly->current->next;
+    }
+  }
+  else
+    return nullPoly;
+
+  return ok;
+}
+
 //////////////////////////////////////////////////
 // Name: fillPoly()
 // Purpose: Fills an empty polynomial of a
@@ -53,11 +93,8 @@ polyList *polyCreate()
 // Return: Pointer to polynomial if successful
 //////////////////////////////////////////////////
 
-int fillPoly(polyList *poly, int order, double arr[])
-{
-    // Fill polyList parameters
-    poly->order = order;
-    
+polyError fillPoly(polyList *poly, int order, double arr[])
+{   
     // Assign head coefficient first
     poly->current = poly->head;
     poly->current->d.coefficient = arr[0];
@@ -72,7 +109,7 @@ int fillPoly(polyList *poly, int order, double arr[])
     
     // Reset current and return success
     poly->current = poly->head;
-    return 0;
+    return ok;
 }
 
 //////////////////////////////////////////////////
@@ -112,7 +149,7 @@ polyNode *newCoeff(double coefficient, int order)
 // Return: returns 0 if successful
 //////////////////////////////////////////////////
 
-int polyDelete(polyList *poly)
+polyError polyDelete(polyList *poly)
 {
     // Reset
     poly->current = poly->head;
@@ -127,7 +164,7 @@ int polyDelete(polyList *poly)
     // be freed
     free(poly->head);
     free(poly);
-    return 0;
+    return ok;
 }
 
 //////////////////////////////////////////////////
@@ -139,7 +176,7 @@ int polyDelete(polyList *poly)
 // Return: returns 0 if successful
 //////////////////////////////////////////////////git 
 
-int deleteNext(polyNode *current)
+polyError deleteNext(polyNode *current)
 {
     polyNode *toDelete;
     if (current->next == NULL)
@@ -156,7 +193,7 @@ int deleteNext(polyNode *current)
         // 3. Delete node from memory
         free(toDelete);
     }
-    return 0;
+    return ok;
 }
 
 ///////////////////////////////////////////////////////
@@ -353,7 +390,6 @@ polyList *polyMultiply(polyList *poly1, double multiplier)
 
 polyList *polyDivide(polyList *poly1, double divider)
 {
-  polyPrint(poly1);
   polyList *polyDiv; //creates a new polynomial to use for division
 	polyDiv = polyCreate();
 	int ord = polyOrder(poly1); //int ord is assigned the value of the order of the polynomial
