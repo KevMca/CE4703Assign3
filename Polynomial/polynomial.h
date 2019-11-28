@@ -39,6 +39,10 @@ polyNode *newCoeff(double coefficient, int order);
 int polyDelete(polyList *poly);
 // Deletes a polynomial coefficient
 int deleteNext(polyNode *current);
+// Enters new polynomial
+polyList *polyDeclare()
+// Prints list of polynomials
+void polyPrintList(polyList *polyArray[], int polyArrayCounter)
 
 // Polynomial operations
 // Adds two polynomials together
