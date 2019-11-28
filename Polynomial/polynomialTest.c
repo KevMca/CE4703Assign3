@@ -109,7 +109,35 @@ int main(int argc, char **argv)
   	//polyAdd()
   	//polySubtract()
   	//multiply()
-  	//divide()
+  	
+	// Test divide //////////////////////////////////////////
+  	passed = 0;
+
+  	// Test dividing by 2
+  	polyList *polyD = polyDivide(poly1, 2);
+
+  	//
+  	polyD->current = polyD->head;
+  	for(int i = 0; i <= 3; i++)
+	{
+		if(polyD->current->d.coefficient == arrFill[i]/2 
+			&& polyD->current->d.order == i)
+		{
+			passed = 1;
+			polyD->current = polyD->current->next;
+		}
+		else
+		{
+			passed = 0;
+			//break;
+		}
+	}
+	if(passed == 1)
+		printf("\nAll coefficients are correct\n"
+			"polyDivide() PASSED\n");
+	else
+		printf("\nNot all coefficients are correct\n"
+			"polyDivide() FAILED, check implementation\n");
   	//polyNormalise()
   	//polyOrder()
 }
