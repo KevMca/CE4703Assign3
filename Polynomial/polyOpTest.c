@@ -54,9 +54,9 @@ int main(int argc, char **argv)
   	/////////////////////////////////////////////////////////
   	
   	// Test polyAdd /////////////////////////////////////////
-  	test("poly1 was not NULL", 
-		"poly1 was NULL", 
-		"polyCreate()", 
+  	test("all coefficients and order were as expected", 
+		"a coefficient or order wasn't as expected", 
+		"polyAdd()", 
 		testPolyAdd);
   	//polyAdd()
   	//polySubtract()
@@ -110,6 +110,9 @@ result testPolyAdd()
 	double arrFill1[] = {0, 1, 2, 3};
 	double arrFill2[] = {3, 2, 1, 0};
 	int order = 3;
+	// Fill arrrays
+	fillPoly(poly1, order, arrFill1);
+	fillPoly(poly2, order, arrFill2);
 
 	// Run polyAdd
 	poly3 = polyAdd(poly1, poly2);
@@ -122,7 +125,7 @@ result testPolyAdd()
 	for(int i = 0; i <=order; i++)
 	{
 		if(poly3->current->d.coefficient != arrFill1[i] + arrFill2[i]
-			|| poly->current->d.order != i)
+			|| poly3->current->d.order != i)
 		{
 			// Coefficient not as expected
 			free(poly1);
