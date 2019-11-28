@@ -49,6 +49,7 @@ polyList *polyCreate()
 // Parameters:  poly - pointer to the polynomial
 // Return: if there was an error
 ///////////////////////////////////////////////////////
+
 polyError polyToHead(polyList *poly)
 {
   if(poly != NULL)
@@ -65,6 +66,7 @@ polyError polyToHead(polyList *poly)
 // Parameters:  poly - pointer to polynomial
 // Return: if there was an error
 ///////////////////////////////////////////////////////
+
 polyError polyToEnd(polyList *poly)
 {
   if(poly != NULL)
