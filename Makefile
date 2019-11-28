@@ -16,8 +16,11 @@ polynomialMain: polynomial.o main.c
 polynomial.o: polynomial.c polynomial.h
 	gcc -Wall -ggdb -c $<
 
-polynomialTest: polynomialTest.c polynomial.o
+polyFuncTest: polyFuncTest.c polynomial.o
 	gcc -Wall -ggdb -o $@ $^
+
+polyOpTest: polyOpTest.c polynomial.o
+        gcc -Wall -ggdb -o $@ $^
 
 .PHONY: clean
 clean:
