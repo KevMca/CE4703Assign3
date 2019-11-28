@@ -186,6 +186,11 @@ polyList *polyAdd(polyList *poly1, polyList *poly2)
     smallOrd = polyOrder(poly1);
     bigOrd = polyOrder(poly2);
   }
+  else
+  {
+    smallOrd = polyOrder(poly1);
+    bigOrd = polyOrder(poly2);
+  }
 
   // reset current cursors
   poly1->current = poly1->head;
@@ -254,6 +259,11 @@ polyList *polySubtract(polyList *poly1, polyList *poly2)
   else if(polyOrder(poly1) < polyOrder(poly2))
   {
     whichOrd = 0;
+    smallOrd = polyOrder(poly1);
+    bigOrd = polyOrder(poly2);
+  }
+  else
+  {
     smallOrd = polyOrder(poly1);
     bigOrd = polyOrder(poly2);
   }
