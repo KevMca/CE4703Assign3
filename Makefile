@@ -7,7 +7,7 @@ vpath %.h $(POLYNOMIAL)
 
 # Make all
 .PHONY: all
-all: polynomialTest polynomialMain
+all: polyFuncTest polyOpTest polynomialMain
 	./polynomialMain
 
 polynomialMain: polynomial.o main.c
