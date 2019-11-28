@@ -49,10 +49,15 @@ void polyPrintList(polyList *polyArray[], int polyArrayCounter)
   }
 }
 
+////////////////////////////////////////////////////
+// Name: main
+// Purpose: creates interface and runs program
+////////////////////////////////////////////////////
+
 int main()
 {
   int continueLoop = 1;
-  polyList *polyArray[20];
+  polyList *polyArray[100];
   int polyArrayCounter = 0;
 
   int polyChoice1, polyChoice2;
@@ -148,6 +153,7 @@ int main()
 	  printf("The order of the polynomial chosen is %.0lf\n", constant);
 	  break;
 
+	// closes the application
 	case 10:
 	  printf("Closing Program\n");
 	  continueLoop = 0;

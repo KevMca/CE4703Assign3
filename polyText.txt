@@ -1,11 +1,11 @@
-/////////////////////////////////////////////////////////////
-// polyText.txt                                            //
-// author: Stephen Gannon                                  //
-// date: 27/11/19                                          //
-// purpose: Contains an explanation of designed data type, //
-//   	    specifications and pseudo-code for             //
-//          all operations                                 //
-/////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
+// polyText.txt                                                      //
+// author: Stephen Gannon, Kevin McAndrew, Conor Pesch, Aaron Naylor //
+// date: 27/11/19                                                    //
+// purpose: Contains an explanation of designed data type,           //
+//   	    specifications and pseudo-code for                       //
+//          all operations                                           //
+///////////////////////////////////////////////////////////////////////
 
 -------------------------------------------------------------------------------
 
@@ -61,6 +61,23 @@ typedef struct
 ///////////////////////////////////////////////////////
 // Specifications and  Pseudo-code for all operations//
 ///////////////////////////////////////////////////////
+
+
+///////////////////////////////////////////////////////
+// Name: polyPrintList()
+// Purpose: To print out a numbered list of all stored
+//	    plynomials
+// Parameters: *polyArray[] - Stores the polnomials
+//		polyArrayCounter - Counter for list of polynomials
+// Return: Prints the list of stored polynomials to the screen
+///////////////////////////////////////////////////////
+
+polyPrintList(polyList *polyArray[], int polyArrayCounter)
+{
+	for the amount of polynomials
+		print out the number of polynomials
+}
+
 
 
 ////////////////////////////////////////////////////

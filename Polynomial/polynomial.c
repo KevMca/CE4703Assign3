@@ -180,6 +180,12 @@ polyList *polyAdd(polyList *poly1, polyList *poly2)
     smallOrd = polyOrder(poly2);
     bigOrd = polyOrder(poly1);
   }
+  else if(polyOrder(poly1) < polyOrder(poly2))
+  {
+    whichOrd = 0;
+    smallOrd = polyOrder(poly1);
+    bigOrd = polyOrder(poly2);
+  }
   else
   {
     smallOrd = polyOrder(poly1);
@@ -213,7 +219,7 @@ polyList *polyAdd(polyList *poly1, polyList *poly2)
     }
     poly3->current->d.coefficient = poly1->current->d.coefficient; // final assign, doesn't make a new node
   }
-  else
+  else if(whichOrd == 0)
   {
     for(int i = smallOrd + 1; i < bigOrd; i++)
     {
@@ -250,6 +256,12 @@ polyList *polySubtract(polyList *poly1, polyList *poly2)
     smallOrd = polyOrder(poly2);
     bigOrd = polyOrder(poly1);
   }
+  else if(polyOrder(poly1) < polyOrder(poly2))
+  {
+    whichOrd = 0;
+    smallOrd = polyOrder(poly1);
+    bigOrd = polyOrder(poly2);
+  }
   else
   {
     smallOrd = polyOrder(poly1);
@@ -280,7 +292,7 @@ polyList *polySubtract(polyList *poly1, polyList *poly2)
     }
     poly3->current->d.coefficient = poly1->current->d.coefficient;
   }
-  else
+  else if(whichOrd == 0)
   {
     for(int i = smallOrd + 1; i < bigOrd; i++)
     {
