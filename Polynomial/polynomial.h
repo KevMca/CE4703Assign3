@@ -36,6 +36,8 @@ polyList *polyCreate();
 // Moves current cursor to head
 polyError polyToHead(polyList *poly);
 // Moves current cursor to tail
+polyError polyToTail(polyList *poly);
+// Moves current cursor to end
 polyError polyToEnd(polyList *poly);
 // Fills a polynomial with coefficients
 polyError fillPoly(polyList *poly, int order, double arr[]);

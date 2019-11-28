@@ -64,24 +64,53 @@ polyError polyToHead(polyList *poly)
 }
 
 ///////////////////////////////////////////////////////
-// Name: polyToend()
-// Purpose: Moves current cursor to the end of the polynomial
+// Name: polyToTail()
+// Purpose: Moves current cursor to the end of the
+//          where the next node is the tail
+// Parameters:  poly - pointer to polynomial
+// Return: if there was an error
+///////////////////////////////////////////////////////
+
+polyError polyToTail(polyList *poly)
+{
+  // Report null polynomial
+  if(poly == NULL)
+    return nullPoly;
+
+  // While next isn't equal to NULL increment the current
+  while(poly->current->next != NULL)
+  {
+    poly->current = poly->current->next;
+  }
+
+  return ok;
+}
+
+///////////////////////////////////////////////////////
+// Name: polyToEnd()
+// Purpose: Moves current cursor to the end of the
+//          polynomial where there is a non-zero
+//          coefficient
 // Parameters:  poly - pointer to polynomial
 // Return: if there was an error
 ///////////////////////////////////////////////////////
 
 polyError polyToEnd(polyList *poly)
 {
-  if(poly != NULL)
-  {
-    // While next isn't equal to NULL increment the current
-    while(poly->current->next != NULL)
-    {
-      poly->current = poly->current->next;
-    }
-  }
-  else
+  // Report null polynomial
+  if(poly == NULL)
     return nullPoly;
+
+  // Find high non-zero order
+  int order = polyOrder(poly);
+
+  // Reset current cursor to head
+  polyToHead(poly);
+  // While next isn't equal to NULL increment the current
+  for(int i = 0; i < order; i++)
+  {
+    poly->current = poly->current->next;
+  }
 
   return ok;
 }
@@ -451,17 +480,8 @@ polyList *polyNormalise(polyList *poly1)
   // Set up variables for result and highest coefficient
   polyList *norm;
   double highCoeff;
-  // Find order of polynomial
-  int order = polyOrder(poly1);
 
-  // Reset current cursor to head
-  polyToHead(poly1);
-
-  // 
-  for(int i = 0; i < order; i++)
-  {
-      poly1->current = poly1->current->next; // sets current to next value
-  }
+  polyToEnd(poly1);
   highCoeff = poly1->current->d.coefficient; // stores coefficient
   poly1->current = poly1->head;
   norm = polyDivide(poly1, highCoeff); // calls dividing function

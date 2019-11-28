@@ -18,6 +18,7 @@ typedef enum {PASSED, FAILED} result;
 // Test functions that test each individual function
 result testPolyCreate();
 result testPolyToHead();
+result testPolyToTail();
 result testPolyToEnd();
 result testFillPoly();
 result testNewCoeff();
@@ -63,6 +64,12 @@ int main(int argc, char **argv)
 		"current cursor didn't move to head", 
 		"polyToHead()", 
 		testPolyToHead);
+
+	// Test polyToTail //////////////////////////////////////
+	test("current cursor moved to tail", 
+		"current cursor didn't move to tail", 
+		"polyToTail()", 
+		testPolyToTail);
 
 	// Test polyToEnd //////////////////////////////////////
 	test("current cursor moved to end", 
@@ -146,15 +153,41 @@ result testPolyToHead()
 }
 
 /////////////////////////////////////////////////////////
+// Test polyToTail
+/////////////////////////////////////////////////////////
+result testPolyToTail()
+{
+	// Create new polynomial and add node
+	polyList *poly1 = polyCreate();
+	poly1->current->next = newCoeff(0, 1);
+
+	// Run polyToEnd
+	polyToTail(poly1);
+
+	if(poly1->current == poly1->head->next)
+	{
+		// Successfully moved current cursor to end
+		polyDelete(poly1);
+		return PASSED;
+	}
+
+	// Current cursor is not the same as end
+	polyDelete(poly1);
+	return FAILED;
+}
+
+/////////////////////////////////////////////////////////
 // Test polyToEnd
 /////////////////////////////////////////////////////////
 result testPolyToEnd()
 {
 	// Create new polynomial and add node
 	polyList *poly1 = polyCreate();
-	poly1->current->next = newCoeff(0, 1);
+	poly1->current->next = newCoeff(1, 1);
+	poly1->current = poly1->current->next;
+	poly1->current->next = newCoeff(0, 2);
 
-	// Run polyToHead
+	// Run polyToEnd
 	polyToEnd(poly1);
 
 	if(poly1->current == poly1->head->next)
@@ -165,6 +198,7 @@ result testPolyToEnd()
 	}
 
 	// Current cursor is not the same as end
+	printf("\n%d", polyOrder(poly1));
 	polyDelete(poly1);
 	return FAILED;
 }
@@ -221,12 +255,12 @@ result testNewCoeff()
 	fillPoly(poly1, order, arrFill);
 
 	// Reset current pointer and move to the end
-	polyToEnd(poly1);
+	polyToTail(poly1);
 	// Add new coefficient to the end
 	poly1->current->next = newCoeff(4, order + 1);
 	
 	// Test if the new coefficient was added on the end
-	polyToEnd(poly1);
+	polyToTail(poly1);
 	if(poly1->current->d.coefficient == 4
 		&& poly1->current->d.order == order + 1)
 	{
