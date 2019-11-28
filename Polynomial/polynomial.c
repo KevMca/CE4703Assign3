@@ -130,8 +130,8 @@ polyNode *newCoeff(double coefficient, int order)
     polyNode *new_node = (polyNode*)malloc(sizeof(polyNode));
     if(new_node == NULL)
     {
-        // Report error
-        exit(0);
+        // Return NULL
+        return new_node;
     }
 
     // Assign attributes
@@ -144,37 +144,11 @@ polyNode *newCoeff(double coefficient, int order)
 }
 
 //////////////////////////////////////////////////
-// Name: polyDelete()
-// Purpose: Deletes and frees up memory from a
-// 	    polynomial
-// Parameters: poly - the to delete
-// Return: returns 0 if successful
-//////////////////////////////////////////////////
-
-polyError polyDelete(polyList *poly)
-{
-    // Reset
-    poly->current = poly->head;
-
-    // While there is a next node, delete current node
-    while(poly->head->next != NULL)
-    {
-        deleteNext(poly->current);
-    }
-
-    // Polynomial is empty, so head and polynomial need to
-    // be freed
-    free(poly->head);
-    free(poly);
-    return ok;
-}
-
-//////////////////////////////////////////////////
 // Name: deleteNext()
 // Purpose: Deletes and frees up memory for the next
-// 	    node after the current node specified
+//      node after the current node specified
 // Parameters: toDelete - the coefficient node to
-// 	       to delete
+//         to delete
 // Return: returns 0 if successful
 //////////////////////////////////////////////////git 
 
@@ -184,7 +158,7 @@ polyError deleteNext(polyNode *current)
     if (current->next == NULL)
     {
         // Next is tail => cannot remove node
-        return -1;
+        return nodeErr;
     }
     else
     {
@@ -195,6 +169,34 @@ polyError deleteNext(polyNode *current)
         // 3. Delete node from memory
         free(toDelete);
     }
+    return ok;
+}
+
+//////////////////////////////////////////////////
+// Name: polyDelete()
+// Purpose: Deletes and frees up memory from a
+// 	    polynomial
+// Parameters: poly - the to delete
+// Return: returns 0 if successful
+//////////////////////////////////////////////////
+
+polyError polyDelete(polyList *poly)
+{
+    // Reset current cursor
+    polyToHead(poly);
+
+    // While there is a next node, delete current node
+    while(poly->head->next != NULL)
+    {
+        // If deleteNext returns a node error return
+        if(deleteNext(poly->current) != ok)
+            return nodeErr;
+    }
+
+    // Polynomial is empty, so head and polynomial need to
+    // be freed
+    free(poly->head);
+    free(poly);
     return ok;
 }
 
