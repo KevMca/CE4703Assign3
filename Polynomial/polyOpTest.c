@@ -71,36 +71,32 @@ int main(int argc, char **argv)
 		"polyMultiply()", 
 		testPolyMultiply);
   	
-	// Test divide //////////////////////////////////////////
-  	/*passed = 0;
+	// Test polyDivide //////////////////////////////////////
+  	test("all coefficients and order were as expected", 
+		"a coefficient or order wasn't as expected", 
+		"polyDivide()", 
+		testPolyDivide);
 
-  	// Test dividing by 2
-  	polyList *polyD = polyDivide(poly1, 2);
+  	// Test polyNormalise ///////////////////////////////////
+  	test("all coefficients and order were as expected", 
+		"a coefficient or order wasn't as expected", 
+		"polyNormalise()", 
+		testPolyNormalise);
 
-  	// Reset current cursor to head
-  	polyD->current = polyD->head;
-  	for(int i = 0; i <= 3; i++)
-	{
-		if(polyD->current->d.coefficient == arrFill[i]/2 
-			&& polyD->current->d.order == i)
-		{
-			passed = 1;
-			polyD->current = polyD->current->next;
-		}
-		else
-		{
-			passed = 0;
-			//break;
-		}
-	}
-	if(passed == 1)
-		printf("\nAll coefficients are correct\n"
-			"polyDivide() PASSED\n");
-	else
-		printf("\nNot all coefficients are correct\n"
-			"polyDivide() FAILED, check implementation\n");*/
-  	//polyNormalise()
-  	//polyOrder()
+  	// Test polyOrder ///////////////////////////////////////
+  	test("returned correct order", 
+		"order was not as expected", 
+		"polyOrder()", 
+		testPolyOrder);
+
+  	//Print new line for formatting
+  	printf("\n");
+
+  	// Test polyPrint ///////////////////////////////////////
+  	test("no error returned", 
+		"some error returned", 
+		"polyPrint()", 
+		testPolyPrint);
 
   	//Print new line for formatting
   	printf("\n");
@@ -253,4 +249,146 @@ result testPolyMultiply()
 	polyDelete(poly1);
 	polyDelete(poly2);
 	return PASSED;
+}
+
+/////////////////////////////////////////////////////////
+// Test polyDivide
+/////////////////////////////////////////////////////////
+result testPolyDivide()
+{
+	// Create polynomials
+	polyList *poly1 = polyCreate();
+	polyList *poly2 = polyCreate();
+	// Create arr to fill polynomials
+	double arrFill1[] = {0, 1, 2, 3};
+	int order = 3;
+	// Fill arrrays
+	fillPoly(poly1, order, arrFill1);
+
+	// Run polyAdd
+	poly2 = polyDivide(poly1, 2);
+
+	// Reset current cursor
+	polyToHead(poly1);
+	polyToHead(poly2);
+	// Check each coefficient and order
+	for(int i = 0; i <=order; i++)
+	{
+		if(poly2->current->d.coefficient != arrFill1[i] / 2
+			|| poly2->current->d.order != i)
+		{
+			// Print current iteration, order and coefficient
+			printf("\niter: %d\norder:%d\ncoefficient:%lf", i, 
+				poly2->current->d.order, poly2->current->d.coefficient);
+			// Coefficient not as expected
+			polyDelete(poly1);
+			polyDelete(poly2);
+			return FAILED;
+		}
+		// Increment current cursors
+		poly2->current = poly2->current->next;
+		poly1->current = poly1->current->next;
+	}
+
+	// All coefficients were as expected
+	polyDelete(poly1);
+	polyDelete(poly2);
+	return PASSED;
+}
+
+/////////////////////////////////////////////////////////
+// Test polyNormalise
+/////////////////////////////////////////////////////////
+result testPolyNormalise()
+{
+	// Create polynomials
+	polyList *poly1 = polyCreate();
+	polyList *poly2 = polyCreate();
+	// Create arr to fill polynomials
+	double arrFill1[] = {0, 1, 2, 3};
+	int order = 3;
+	// Fill arrrays
+	fillPoly(poly1, order, arrFill1);
+
+	// Run polyAdd
+	poly2 = polyNormalise(poly1);
+
+	// Reset current cursor
+	polyToHead(poly1);
+	// Check each coefficient and order
+	for(int i = 0; i <=order; i++)
+	{
+		if(poly2->current->d.coefficient != arrFill1[i] / 3
+			|| poly2->current->d.order != i)
+		{
+			// Print current iteration, order and coefficient
+			printf("\niter: %d\norder:%d\ncoefficient:%lf", i, 
+				poly2->current->d.order, poly2->current->d.coefficient);
+			// Coefficient not as expected
+			polyDelete(poly1);
+			polyDelete(poly2);
+			return FAILED;
+		}
+		// Increment current cursors
+		poly2->current = poly2->current->next;
+		poly1->current = poly1->current->next;
+	}
+
+	// All coefficients were as expected
+	polyDelete(poly1);
+	polyDelete(poly2);
+	return PASSED;
+}
+
+/////////////////////////////////////////////////////////
+// Test polyNormalise
+/////////////////////////////////////////////////////////
+result testPolyOrder()
+{
+	// Create polynomials
+	polyList *poly1 = polyCreate();
+	// Create arr to fill polynomials
+	double arrFill1[] = {0, 1, 2, 3};
+	int order = 3;
+	// Fill arrrays
+	fillPoly(poly1, order, arrFill1);
+
+	// Run polyAdd
+	int returnedOrder = polyOrder(poly1);
+
+	if(returnedOrder == order)
+	{
+		// Returned correct order
+		polyDelete(poly1);
+		return PASSED;
+	}
+
+	// Returned incorrect order
+	polyDelete(poly1);
+	return FAILED;
+}
+
+/////////////////////////////////////////////////////////
+// Test polyPrint
+/////////////////////////////////////////////////////////
+result testPolyPrint()
+{
+	// Create polynomials
+	polyList *poly1 = polyCreate();
+	// Create arr to fill polynomials
+	double arrFill1[] = {0, 1, 2, 3};
+	int order = 3;
+	// Fill arrrays
+	fillPoly(poly1, order, arrFill1);
+
+	if(polyPrint(poly1) == ok)
+	{
+		// No error returned
+		polyDelete(poly1);
+		return PASSED;
+	}
+
+	// There was an error
+	polyDelete(poly1);
+	return FAILED;
 }
