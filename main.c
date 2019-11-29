@@ -1,53 +1,17 @@
+////////////////////////////////////////////////////
 // main.c
+// Purpose: Contains a lovely interface for interacting
+//          with polynomials
+// Author: Conor Pesch
+// Date: 29/11/2019
+////////////////////////////////////////////////////
 
 #include "Polynomial/polynomial.h"
 #include <stdlib.h>
 #include <stdio.h>
 
-
-////////////////////////////////////////////////////
-// Name: polyDeclare
-// Purpose: Declares the polynomial, asks the user to enter a polynomial 
-// Return: returns a polynomial
-////////////////////////////////////////////////////
-
-polyList *polyDeclare()
-{
-  polyList *poly;
-  poly = polyCreate();
-
-  int order;
-  
-  printf("Please enter the order of the polynomial: ");
-  scanf("%d", &order);
-
-  double coeff[order+1];
-
-  printf("Please enter the coefficients of the polynomial from least to most significant\n");
-  for(int i = 0; i <= order; i++){
-    scanf("%lf", &coeff[i]);
-  }
-
-  fillPoly(poly, order, coeff);
-
-  return poly;
-}
-
-////////////////////////////////////////////////////
-// Name: polyPrintList
-// Purpose: prints out a list of polynomials
-// Parameters: polyArray[] - pointer to array of polynomials
-//             PolyArrayCounter - counts number of polynomials in the array
-////////////////////////////////////////////////////
-
-void polyPrintList(polyList *polyArray[], int polyArrayCounter)
-{
-  for(int i = 0; i < polyArrayCounter; i++)
-  {
-    printf("%d. ", i+1);
-    polyPrint(polyArray[i]);
-  }
-}
+polyList *polyDeclare();
+void polyPrintList(polyList *polyArray[], int polyArrayCounter);
 
 ////////////////////////////////////////////////////
 // Name: main
@@ -166,4 +130,48 @@ int main()
 	}
     }
   
+}
+
+////////////////////////////////////////////////////
+// Name: polyDeclare
+// Purpose: Declares the polynomial, asks the user to enter a polynomial 
+// Return: returns a polynomial
+////////////////////////////////////////////////////
+
+polyList *polyDeclare()
+{
+  polyList *poly;
+  poly = polyCreate();
+
+  int order;
+  
+  printf("Please enter the order of the polynomial: ");
+  scanf("%d", &order);
+
+  double coeff[order+1];
+
+  printf("Please enter the coefficients of the polynomial from least to most significant\n");
+  for(int i = 0; i <= order; i++){
+    scanf("%lf", &coeff[i]);
+  }
+
+  fillPoly(poly, order, coeff);
+
+  return poly;
+}
+
+////////////////////////////////////////////////////
+// Name: polyPrintList
+// Purpose: prints out a list of polynomials
+// Parameters: polyArray[] - pointer to array of polynomials
+//             PolyArrayCounter - counts number of polynomials in the array
+////////////////////////////////////////////////////
+
+void polyPrintList(polyList *polyArray[], int polyArrayCounter)
+{
+  for(int i = 0; i < polyArrayCounter; i++)
+  {
+    printf("%d. ", i+1);
+    polyPrint(polyArray[i]);
+  }
 }
