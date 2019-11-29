@@ -122,6 +122,76 @@ polyList *polyCreate()
 	return poly
 }
 
+///////////////////////////////////////////////////////
+// Name: polyToHead()
+// Purpose: Moves current cursor to the end of the head
+// Parameters:  poly - pointer to the polynomial
+// Return: if there was an error
+///////////////////////////////////////////////////////
+
+polyError polyToHead(polyList *poly)
+{
+  if poly != NULL
+    current is head
+  else
+    return nullPoly
+  return ok
+}
+
+///////////////////////////////////////////////////////
+// Name: polyToTail()
+// Purpose: Moves current cursor to the end of the
+//          where the next node is the tail
+// Parameters:  poly - pointer to polynomial
+// Return: if there was an error
+///////////////////////////////////////////////////////
+
+polyError polyToTail(polyList *poly)
+{
+  if poly == NULL
+    return nullPoly
+  while next != Null
+    current = next
+  return ok
+}
+
+///////////////////////////////////////////////////////
+// Name: polyToEnd()
+// Purpose: Moves current cursor to the end of the
+//          polynomial where there is a non-zero
+//          coefficient
+// Parameters:  poly - pointer to polynomial
+// Return: if there was an error
+///////////////////////////////////////////////////////
+
+polyError polyToEnd(polyList *poly)
+{
+  if poly == NULL
+    return nullPoly
+  int order = polyOrder(poly)
+  polyToHead(poly);
+  for loop 0 to order
+    polyIncrement(poly, 1);
+  return ok;
+}
+
+///////////////////////////////////////////////////////
+// Name: polyIncrement()
+// Purpose: Increments the current cursor by a defined
+//          number of steps
+// Parameters:  poly - pointer to polynomial
+//              steps - number of steps to increment by
+// Return: if there was an error
+///////////////////////////////////////////////////////
+polyError polyIncrement(polyList *poly, int steps)
+{
+  for loop for steps
+    if next = Null
+      return nodeErr
+    current = next
+  return ok
+}
+
 
 //////////////////////////////////////////////////
 // Name: fillPoly()
