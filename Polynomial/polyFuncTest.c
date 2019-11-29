@@ -216,7 +216,8 @@ result testPolyToEnd()
 
 /////////////////////////////////////////////////////////
 // Test polyIncrement
-// Expected Result: cursor incremented correct number of steps
+// Input: 0 1 2 3
+// Expected Result: cursor incremented 2 steps
 /////////////////////////////////////////////////////////
 result testPolyIncrement()
 {
@@ -248,7 +249,8 @@ result testPolyIncrement()
 
 /////////////////////////////////////////////////////////
 // Test fillPoly
-// Expected Result: all coefficients were correct
+// Input: 0 1 2 3
+// Expected Result: 0 1 2 3
 /////////////////////////////////////////////////////////
 result testFillPoly()
 {
@@ -290,7 +292,8 @@ result testFillPoly()
 
 /////////////////////////////////////////////////////////
 // Test newCoeff
-// Expected Result: end coefficient and order was correct
+// Input: 0 1 2 3
+// Expected Result: 4 and 4
 /////////////////////////////////////////////////////////
 result testNewCoeff()
 {
