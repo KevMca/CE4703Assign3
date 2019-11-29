@@ -7,8 +7,6 @@
 
 #include "polynomial.h"
 
-// incrementCursor(number of steps)
-
 ///////////////////////////////////////////////////
 // Name: polyCreate()
 // Purpose: Creates and empty polynomial, head points
