@@ -30,7 +30,7 @@ typedef struct
 
 typedef enum {ok, memoryErr, nodeErr, nullPoly} polyError;
 
-// Polynomial editing operation
+// Polynomial editing functions
 // Creates an empty polynomial
 polyList *polyCreate();
 // Moves current cursor to head

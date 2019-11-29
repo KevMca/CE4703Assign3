@@ -188,7 +188,7 @@ result testPolyToTail()
 /////////////////////////////////////////////////////////
 result testPolyToEnd()
 {
-	// Create new polynomial and add node
+	// Create new polynomial and add nodes
 	polyList *poly1 = polyCreate();
 	poly1->current->next = newCoeff(1, 1);
 	poly1->current = poly1->current->next;

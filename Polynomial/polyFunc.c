@@ -102,7 +102,7 @@ polyError polyToEnd(polyList *poly)
 
   // Find high non-zero order
   int order = polyOrder(poly);
-
+  
   // Reset current cursor to head
   polyToHead(poly);
   // While next isn't equal to NULL increment the current

@@ -308,28 +308,29 @@ polyList *polyNormalise(polyList *poly1)
 int polyOrder(polyList *poly1)
 {
   // Variable to store highest order in polyList
-  int highOrder;
+  int highOrder = 0;
   // Reset current to head
   polyToHead(poly1);
 
   // Do while you haven't reached the end
   int i = 0;
-  do
+  while(poly1->current->next != NULL)
   {
+      // Set current to next value
+      polyIncrement(poly1, 1);
+      i++;
+
       // If poly1's coefficient is not equal to 0 
-      if(poly1->current->d.coefficient !=0)
+      if(poly1->current->d.coefficient != 0)
       {
          // Length is highest order that is not equal to 0
 	       highOrder = i;
       } 
-      // Set current to next value
-      polyIncrement(poly1, 1);
-      i++;
-  } while(poly1->current->next != NULL);
+  } 
 
   // Reset current to head and return
   polyToHead(poly1);
-  return ++highOrder;
+  return highOrder;
 }
 
 ////////////////////////////////////////////////////
