@@ -10,7 +10,13 @@
 #include <stdlib.h>
 #include <stdio.h>
 
+// Helper function declarations
 polyList *polyDeclare();
+void delete(int *polyArrayCounter, polyList *polyArray[100]);
+void doubleOperation(int *polyArrayCounter, polyList *polyArray[100], 
+	polyList *(*f)(polyList *, polyList *));
+void singleOperation(int *polyArrayCounter, polyList *polyArray[100], 
+	polyList *(*f)(polyList *, double constant));
 void polyPrintList(polyList *polyArray[], int polyArrayCounter);
 
 ////////////////////////////////////////////////////
@@ -24,7 +30,7 @@ int main()
   polyList *polyArray[100];
   int polyArrayCounter = 0;
 
-  int polyChoice1, polyChoice2;
+  int polyChoice1;
   double constant;
   
   while(continueLoop)
@@ -63,70 +69,32 @@ int main()
 		  
 		// deletes a polynomial
 		case 3:
-		  	printf("\nPlease select a polynomial to delete\n\n");
-		  	polyPrintList(polyArray, polyArrayCounter);
-		  	printf("\n");
-		  	scanf("%d",&polyChoice1);
-
-		  	// Check if choice is valid
-		  	if(polyChoice1 > polyArrayCounter || polyChoice1 < 1)
-		  		break;
-
-		  	// If valid, remove polynomial from list
-		  	polyDelete(polyArray[polyChoice1 - 1]);
-
-		  	// Move all later polynomials back
-		  	for(int i = polyChoice1; i <= polyArrayCounter; i++)
-		  	{
-		  		polyArray[i - 1] = polyArray[i];
-		  	}
-		  	
-		  	// Move array counter back
-		  	polyArrayCounter -= 1;
+		  	delete(&polyArrayCounter, polyArray);
 		  	break;
 		  
 		// adds 2 polynomials
 		case 4:
-		  	printf("\nPlease select two polynomials to add together\n");
-		  	polyPrintList(polyArray, polyArrayCounter);
-		  	printf("\n");
-		  	scanf("%d %d", &polyChoice1, &polyChoice2);
-		  	polyArray[polyArrayCounter] = polyAdd(polyArray[polyChoice1 - 1], polyArray[polyChoice2 - 1]);
-		  	polyPrint(polyArray[polyArrayCounter]);
-		  	polyArrayCounter += 1;
+			// Pass polyAdd() into operation function
+			printf("\nPlease select two polynomials to add together\n");
+			doubleOperation(&polyArrayCounter, polyArray, polyAdd);
 		  	break;
 		  
 		// subtracts 2 polynomials
 		case 5:
 		  	printf("\nPlease select a polynomial to subract from another\n");
-		  	polyPrintList(polyArray, polyArrayCounter);
-		  	printf("\n");
-		  	scanf("%d %d", &polyChoice1, &polyChoice2);
-		  	polyArray[polyArrayCounter] = polySubtract(polyArray[polyChoice1 - 1], polyArray[polyChoice2 - 1]);
-		  	polyPrint(polyArray[polyArrayCounter]);
-		  	polyArrayCounter += 1;
+		  	doubleOperation(&polyArrayCounter, polyArray, polySubtract);
 		  	break;
 		  
 		// multiplies a polynomial by a constant
 		case 6:
 		  	printf("\nPlease select a polynomial and a constant to multiply together\n");
-		  	polyPrintList(polyArray, polyArrayCounter);
-		  	printf("\n");
-		  	scanf("%d %lf", &polyChoice1, &constant);
-		  	polyArray[polyArrayCounter] = polyMultiply(polyArray[polyChoice1 - 1], constant);
-		  	polyPrint(polyArray[polyArrayCounter]);
-		  	polyArrayCounter += 1;
+		  	singleOperation(&polyArrayCounter, polyArray, polyMultiply);
 		 	break;
 		  
 		// divides a polynomial by a constant
 		case 7:
 		  	printf("\nPlease select a polynomial and a constant to divide from it\n");
-		  	polyPrintList(polyArray, polyArrayCounter);
-		  	printf("\n");
-		  	scanf("%d %lf", &polyChoice1, &constant);
-		  	polyArray[polyArrayCounter] = polyDivide(polyArray[polyChoice1 - 1], constant);
-		  	polyPrint(polyArray[polyArrayCounter]);
-		  	polyArrayCounter += 1;
+		  	singleOperation(&polyArrayCounter, polyArray, polyDivide);
 		  	break;
 		// normalise a polynomial
 		case 8:
@@ -166,7 +134,8 @@ int main()
 
 ////////////////////////////////////////////////////
 // Name: polyDeclare
-// Purpose: Declares the polynomial, asks the user to enter a polynomial 
+// Purpose: Declares the polynomial, asks the user 
+//          to enter a polynomial 
 // Return: returns a polynomial
 ////////////////////////////////////////////////////
 
@@ -190,6 +159,99 @@ polyList *polyDeclare()
   fillPoly(poly, order, coeff);
 
   return poly;
+}
+
+////////////////////////////////////////////////////
+// Name: delete
+// Purpose: Deletes a selected polynomial from the
+//          polynomial list
+// Parameters: polyArrayCounter - the array counter
+//             polyArray - the array of polynomials
+////////////////////////////////////////////////////
+void delete(int *polyArrayCounter, polyList *polyArray[100])
+{
+	// Declare local variables
+	int polyChoice;
+
+	// Print options and read choice
+	printf("\nPlease select a polynomial to delete\n\n");
+	polyPrintList(polyArray, *polyArrayCounter);
+	printf("\n");
+	scanf("%d",&polyChoice);
+
+	// Check if choice is valid
+	if(polyChoice > *polyArrayCounter || polyChoice < 1)
+		return;
+
+	// If valid, remove polynomial from list
+	polyDelete(polyArray[polyChoice - 1]);
+
+	// Move all later polynomials back
+	for(int i = polyChoice; i <= *polyArrayCounter; i++)
+	{
+		polyArray[i - 1] = polyArray[i];
+	}
+
+	// Move array counter back
+	*polyArrayCounter -= 1;
+}
+
+////////////////////////////////////////////////////
+// Name: doubleOperation
+// Purpose: Runs an operation with two polynomials
+// Parameters: polyArrayCounter - the array counter
+//             polyArray - the array of polynomials
+//             *f - pointer to function to use
+////////////////////////////////////////////////////
+void doubleOperation(int *polyArrayCounter, polyList *polyArray[100], 
+	polyList *(*f)(polyList *, polyList *))
+{
+	// Declare local variables
+	int polyChoice1, polyChoice2;
+
+	// Print options and read choice
+	polyPrintList(polyArray, *polyArrayCounter);
+	printf("\n");
+	scanf("%d %d", &polyChoice1, &polyChoice2);
+
+	// Check if choice is valid
+	if((polyChoice1 < 1 || polyChoice1 > *polyArrayCounter)
+		|| (polyChoice2 < 1 || polyChoice2 > *polyArrayCounter))
+		return;
+
+	// Apply given operation
+	polyArray[*polyArrayCounter] = (*f)(polyArray[polyChoice1 - 1], polyArray[polyChoice2 - 1]);
+	polyPrint(polyArray[*polyArrayCounter]);
+	*polyArrayCounter += 1;
+}
+
+////////////////////////////////////////////////////
+// Name: singleOperation
+// Purpose: Runs an operation with one polynomial
+// Parameters: polyArrayCounter - the array counter
+//             polyArray - the array of polynomials
+//             *f - pointer to function to use
+////////////////////////////////////////////////////
+void singleOperation(int *polyArrayCounter, polyList *polyArray[100], 
+	polyList *(*f)(polyList *, double constant))
+{
+	// Declare local variables
+	int polyChoice1;
+	double constant;
+
+	// Print options and read choice
+	polyPrintList(polyArray, *polyArrayCounter);
+	printf("\n");
+	scanf("%d %lf", &polyChoice1, &constant);
+
+	// Check if choice is valid
+	if(polyChoice1 < 1 || polyChoice1 > *polyArrayCounter)
+		return;
+
+	// Apply given operation
+	polyArray[*polyArrayCounter] = (*f)(polyArray[polyChoice1 - 1], constant);
+	polyPrint(polyArray[*polyArrayCounter]);
+	*polyArrayCounter += 1;
 }
 
 ////////////////////////////////////////////////////
