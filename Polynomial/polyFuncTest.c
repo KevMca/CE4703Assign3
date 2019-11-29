@@ -270,6 +270,8 @@ result testFillPoly()
 		else
 		{
 			// Coefficient is incorrect
+			printf("increment:%d\norder:%d\ncoefficient:%lf", i, 
+				poly1->current->d.order, poly1->current->d.coefficient);
 			polyDelete(poly1);
 			return FAILED;
 		}

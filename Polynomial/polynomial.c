@@ -32,7 +32,8 @@ polyList *polyCreate()
         {
             // Allocation successful
             poly->head->next = NULL;
-            poly->current = poly->head;
+            // Reset current to head
+            polyToHead(poly);
         } 
         else
         {
@@ -108,7 +109,7 @@ polyError polyToEnd(polyList *poly)
   // While next isn't equal to NULL increment the current
   for(int i = 0; i < order; i++)
   {
-    poly->current = poly->current->next;
+    polyIncrement(poly, 1);
   }
 
   return ok;
@@ -148,8 +149,9 @@ polyError polyIncrement(polyList *poly, int steps)
 
 polyError fillPoly(polyList *poly, int order, double arr[])
 {   
-    // Assign head coefficient first
-    poly->current = poly->head;
+    // Reset current cursor to head
+    polyToHead(poly);
+    // Assign head first
     poly->current->d.coefficient = arr[0];
     poly->current->d.order = 0;
 
@@ -157,11 +159,11 @@ polyError fillPoly(polyList *poly, int order, double arr[])
     for(int i = 1; i <= order; i++)
     {
         poly->current->next = newCoeff(arr[i], i);
-        poly->current = poly->current->next;
+        polyIncrement(poly, 1);
     }
     
     // Reset current and return success
-    poly->current = poly->head;
+    polyToHead(poly);
     return ok;
 }
 
@@ -181,7 +183,7 @@ polyNode *newCoeff(double coefficient, int order)
     polyNode *new_node = (polyNode*)malloc(sizeof(polyNode));
     if(new_node == NULL)
     {
-        // Return NULL
+        // Return NULL if unsuccessful
         return new_node;
     }
 
@@ -261,11 +263,14 @@ polyError polyDelete(polyList *poly)
 
 polyList *polyAdd(polyList *poly1, polyList *poly2)
 {
-  polyList *poly3; // declares a polynomial
-  poly3 = polyCreate(); // creates an empty polynomial
+  // Declares a polynomial and allocates memory
+  polyList *poly3;
+  poly3 = polyCreate();
+  // Variables for holding which poly is biggest and smallest
   int smallOrd, bigOrd, whichOrd;
-  // checks which polynomial has a higher order
-  // assigns variables for each order
+
+  // Checks which polynomial has a higher order
+  // Assigns variables for each order
   if(polyOrder(poly1) > polyOrder(poly2))
   {
     whichOrd = 1;
@@ -284,47 +289,52 @@ polyList *polyAdd(polyList *poly1, polyList *poly2)
     bigOrd = polyOrder(poly2);
   }
 
-  // reset current cursors
-  poly1->current = poly1->head;
-  poly2->current = poly2->head;
-  poly3->current = poly3->head;
+  // Reset current cursors
+  polyToHead(poly1);
+  polyToHead(poly2);
+  polyToHead(poly3);
 
-  // adds each coefficient of the polynomials to each other until one runs out of coefficients
+  // Adds each coefficient of the polynomials until one runs out of coefficients
   for(int i = 0; i <= smallOrd; i++)
   {
     poly3->current->d.coefficient = poly1->current->d.coefficient + poly2->current->d.coefficient;
-    poly1->current = poly1->current->next;
-    poly2->current = poly2->current->next;
+    polyIncrement(poly1, 1);
+    polyIncrement(poly2, 1);
     poly3->current->next = newCoeff(0, i + 1);
-    poly3->current = poly3->current->next;
+    polyIncrement(poly3, 1);
   }
 
-  // checks which polynomial has the higher order then assigns the rest of its terms to poly3
+  // Checks which polynomial has the higher order 
+  // Then assigns the rest of its terms to poly3
   if(whichOrd == 1)
   {
     for(int i = smallOrd + 1; i < bigOrd; i++)
     {
       poly3->current->d.coefficient = poly1->current->d.coefficient;
-      poly1->current = poly1->current->next;
+      polyIncrement(poly1, 1);
       poly3->current->next = newCoeff(0, i + 1);
-      poly3->current = poly3->current->next;
+      polyIncrement(poly3, 1);
     }
-    poly3->current->d.coefficient = poly1->current->d.coefficient; // final assign, doesn't make a new node
+    // Do not make new node on final assign
+    poly3->current->d.coefficient = poly1->current->d.coefficient;
   }
   else if(whichOrd == 0)
   {
     for(int i = smallOrd + 1; i < bigOrd; i++)
     {
       poly3->current->d.coefficient = poly2->current->d.coefficient;
-      poly2->current = poly2->current->next;
+      polyIncrement(poly2, 1);
       poly3->current->next = newCoeff(0, i + 1);
-      poly3->current = poly3->current->next;
+      polyIncrement(poly3, 1);
     }
+    // Do not make new node on final assign
     poly3->current->d.coefficient = poly2->current->d.coefficient;
   }
 
-  // reset current cursor to head
-  poly3->current = poly3->head;
+  // Reset current cursor to head
+  polyToHead(poly1);
+  polyToHead(poly2);
+  polyToHead(poly3);
   return poly3;
 }
 
@@ -338,10 +348,12 @@ polyList *polyAdd(polyList *poly1, polyList *poly2)
 
 polyList *polySubtract(polyList *poly1, polyList *poly2)
 {
+  // Declares a polynomial and allocates memory
   polyList *poly3;
-  poly3 = polyCreate(); // creates an empty polynomial
+  poly3 = polyCreate();
+  // Variables for holding which poly is biggest and smallest
   int smallOrd, bigOrd, whichOrd;
-  // checks which polynomial has the higher order
+  // Checks which polynomial has the higher order
   if(polyOrder(poly1) > polyOrder(poly2))
   {
     whichOrd = 1;
@@ -360,28 +372,35 @@ polyList *polySubtract(polyList *poly1, polyList *poly2)
     bigOrd = polyOrder(poly2);
   }
 
-  // subracts poly2 from poly1 until one runs out of coefficients
+  // Reset current cursors
+  polyToHead(poly1);
+  polyToHead(poly2);
+  polyToHead(poly3);
+
+  // Subtracts poly2 from poly1 until one runs out of coefficients
   for(int i = 0; i <= smallOrd; i++)
   {
     poly3->current->d.coefficient = poly1->current->d.coefficient - poly2->current->d.coefficient;
-    poly1->current = poly1->current->next;
-    poly2->current = poly2->current->next;
+    polyIncrement(poly1, 1);
+    polyIncrement(poly2, 1);
     poly3->current->next = newCoeff(0, i + 1);
-    poly3->current = poly3->current->next;
+    polyIncrement(poly3, 1);
   }
 
-  // checks which polynomial has the higher order
-  // if the minuend has a higher order, its remaining elements are assigned to poly3
-  // if the subtrahend has a higher order, the inverse of its remaining elements are assigned to poly3
+  // Checks which polynomial has the higher order
+  // If the minuend has a higher order, its remaining elements are assigned to poly3
+  // If the subtrahend has a higher order, the negative of its 
+  // remaining elements are assigned to poly3
   if(whichOrd == 1)
   {
     for(int i = smallOrd + 1; i < bigOrd; i++)
     {
       poly3->current->d.coefficient = poly1->current->d.coefficient;
-      poly1->current = poly1->current->next;
+      polyIncrement(poly1, 1);
       poly3->current->next = newCoeff(0, i + 1);
-      poly3->current = poly3->current->next;
+      polyIncrement(poly3, 1);
     }
+    // Do not make new node on final assign
     poly3->current->d.coefficient = poly1->current->d.coefficient;
   }
   else if(whichOrd == 0)
@@ -389,15 +408,18 @@ polyList *polySubtract(polyList *poly1, polyList *poly2)
     for(int i = smallOrd + 1; i < bigOrd; i++)
     {
       poly3->current->d.coefficient = 0 - poly2->current->d.coefficient;
-      poly2->current = poly2->current->next;
+      polyIncrement(poly2, 1);
       poly3->current->next = newCoeff(0, i + 1);
-      poly3->current = poly3->current->next;
+      polyIncrement(poly3, 1);
     }
+    // Do not make new node on final assign
     poly3->current->d.coefficient = 0 - poly2->current->d.coefficient;
   }
 
-  // reset current cursor to head
-  poly3->current = poly3->head;
+  // Reset current cursor to head
+  polyToHead(poly1);
+  polyToHead(poly2);
+  polyToHead(poly3);
   return poly3;
 }
 
@@ -411,27 +433,29 @@ polyList *polySubtract(polyList *poly1, polyList *poly2)
 
 polyList *polyMultiply(polyList *poly1, double multiplier)
 {
-	polyList *polyMul; //creates a new polynomial to use for multiplication
+  // Declares a polynomial and allocates memory
+	polyList *polyMul;
 	polyMul = polyCreate();
-	int ord = polyOrder(poly1); //int ord is assigned the value of the order of the polynomial
+
+  // Find order of the polynomial
+	int ord = polyOrder(poly1);
 	
   // Reset cursors to head
 	polyToHead(polyMul);
   polyToHead(poly1);
-	
-	//Assign the remaining coefficients
+	//Assign the coefficients to poly1 * multiplier
 	for(int i = 0; i < ord; i++)
 	{	
-		//value of current coefficient is multiped 
-    //by the double and stored in the new polynomial
+		// Value of current coefficient is multiped 
+    // by the double and stored in the new polynomial
 		polyMul->current->d.coefficient = 
 			(poly1->current->d.coefficient) * (multiplier);
 
-    //create new node and move to that node
+    // Create new node and move to that node
     polyMul->current->next = newCoeff(0, i + 1);
-    polyMul->current = polyMul->current->next;
+    polyIncrement(polyMul, 1);
     // Increment poly1 as well
-    poly1->current = poly1->current->next;
+    polyIncrement(poly1, 1);
 	}
   // Do not create new node, because it is at the end
   polyMul->current->d.coefficient = 
@@ -454,15 +478,17 @@ polyList *polyMultiply(polyList *poly1, double multiplier)
 
 polyList *polyDivide(polyList *poly1, double divider)
 {
-  polyList *polyDiv; //creates a new polynomial to use for division
+  // Declares a polynomial and allocates memory
+  polyList *polyDiv;
 	polyDiv = polyCreate();
-	int ord = polyOrder(poly1); //int ord is assigned the value of the order of the polynomial
+
+  // Find order of the polynomial
+	int ord = polyOrder(poly1);
   
   // Reset current cursors
 	polyToHead(polyDiv);
   polyToHead(poly1);
-	
-  //Assign the remaining coefficients
+  //Assign the coefficients to poly1 / divider
 	for(int i = 0; i < ord; i++)
 	{	
       //value of current coefficient is multiped 
@@ -472,9 +498,9 @@ polyList *polyDivide(polyList *poly1, double divider)
 
       //create new node and move to that node
       polyDiv->current->next = newCoeff(0, i + 1);
-      polyDiv->current = polyDiv->current->next;
+      polyIncrement(polyDiv, 1);
       // Increment poly1 as well
-      poly1->current = poly1->current->next;
+      polyIncrement(poly1, 1);
 	}
   // Do not create new node, because it is at the end
   polyDiv->current->d.coefficient = 
@@ -503,10 +529,16 @@ polyList *polyNormalise(polyList *poly1)
   double highCoeff;
 
   polyToEnd(poly1);
-  highCoeff = poly1->current->d.coefficient; // stores coefficient
-  poly1->current = poly1->head;
-  norm = polyDivide(poly1, highCoeff); // calls dividing function
-  return norm; // returns coefficient of highest order 
+  // Store highest coefficient
+  highCoeff = poly1->current->d.coefficient;
+  // Reset current cursor to head and call dividing function
+  polyToHead(poly1);
+  norm = polyDivide(poly1, highCoeff);
+
+  // Return normalised polynomial
+  polyToHead(poly1);
+  polyToHead(norm);
+  return norm;
 }
 
 /////////////////////////////////////////////////////
@@ -522,7 +554,7 @@ int polyOrder(polyList *poly1)
   // Variable to store highest order in polyList
   int highOrder;
   // Reset current to head
-  poly1->current = poly1->head;
+  polyToHead(poly1);
 
   // Do while you haven't reached the end
   int i = 0;
@@ -535,13 +567,13 @@ int polyOrder(polyList *poly1)
 	       highOrder = i;
       } 
       // Set current to next value
-      poly1->current = poly1->current->next;
+      polyIncrement(poly1, 1);
       i++;
-  } while(poly1->current != NULL);
+  } while(poly1->current->next != NULL);
 
   // Reset current to head and return
-  poly1->current = poly1->head;
-  return highOrder;
+  polyToHead(poly1);
+  return ++highOrder;
 }
 
 ////////////////////////////////////////////////////
@@ -565,14 +597,14 @@ polyError polyPrint(polyList *poly1)
   // Print constant coefficient first
   fprintf(stdout, "%.3lf", (poly1->current->d.coefficient));
   // Increment the current cursor
-  poly1->current = poly1->current->next;
+  polyIncrement(poly1, 1);
   
   // Repeat print for the remaining elements
   for(int i = 1; i <= order; i ++) // for loop from 0 to highest order
   {
       fprintf(stdout, " + %.3lfx^%d", poly1->current->d.coefficient, i);
       // Increment the current cursor
-      poly1->current = poly1->current->next;
+      polyIncrement(poly1, 1);
   }
 
   // Print new line
