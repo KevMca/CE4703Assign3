@@ -1,9 +1,11 @@
 ////////////////////////////////////////////////////
 // main.c
-// Purpose: Contains a lovely interface for interacting
+//
+// purpose: Contains a lovely interface for interacting
 //          with polynomials
-// Author: Conor Pesch
-// Date: 29/11/2019
+//
+// authors: Kevin McAndrew, Aaron Naylor, Stephen Gannon, Conor Pesch
+// date:    29.11.2019
 ////////////////////////////////////////////////////
 
 #include "Polynomial/polynomial.h"

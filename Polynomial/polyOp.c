@@ -1,10 +1,12 @@
 ////////////////////////////////////////////////////
 // polyOp.c
-// Purpose: Contains all operations to add, subtract,
+//
+// purpose: Contains all operations to add, subtract,
 //          multiply, divide, normalise, get order of
 //          and print polynomials
-// Authors: Kevin McAndrew, Aaron Naylor, Stephen Gannon, Conor Pesch
-// Date: 29/11/2019
+//
+// authors: Kevin McAndrew, Aaron Naylor, Stephen Gannon, Conor Pesch
+// date:    29.11.2019
 ////////////////////////////////////////////////////
 
 #include "polynomial.h"

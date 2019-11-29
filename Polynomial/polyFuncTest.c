@@ -1,11 +1,11 @@
 /////////////////////////////////////////////////////////
 // polyFuncTest.c
 //
-// main test program for testing Polynomial functions for
-// creating, deleting and modifying polynomials
+// purpose: main test program for testing Polynomial functions for
+//          creating, deleting and modifying polynomials
 //
-// author:      kevin mcandrew
-// date:        28.11.2019
+// authors: Kevin McAndrew, Aaron Naylor, Stephen Gannon, Conor Pesch
+// date:    29.11.2019
 /////////////////////////////////////////////////////////
 
 #include <stdio.h>

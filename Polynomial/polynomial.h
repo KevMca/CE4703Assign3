@@ -1,7 +1,11 @@
-//polynomial.h
-//author: Stephen Gannon
-//date: 25/11/19
-//purpose: To declare all functions and data structures
+/////////////////////////////////////////////////////////
+// polynomial.h
+//
+// purpose: To declare all functions and data structures
+//
+// authors: Stephen Gannon, Kevin McAndrew, Aaron Naylor, Conor Pesch
+// date:    29.11.2019
+/////////////////////////////////////////////////////////
 
 #include <stdlib.h>
 #include <stdio.h> 

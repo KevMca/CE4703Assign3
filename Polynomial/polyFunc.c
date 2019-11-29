@@ -1,9 +1,11 @@
 ////////////////////////////////////////////////////
 // polyFunc.c
-// Purpose: Contains all functions to create, delete 
+//
+// purpose: Contains all functions to create, delete 
 //          and manipulate polynomials
-// Authors: Kevin McAndrew, Aaron Naylor, Stephen Gannon, Conor Pesch
-// Date: 29/11/2019
+//
+// authors: Kevin McAndrew, Aaron Naylor, Stephen Gannon, Conor Pesch
+// date:    29.11.2019
 ////////////////////////////////////////////////////
 
 #include "polynomial.h"

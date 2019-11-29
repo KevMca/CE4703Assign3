@@ -1,9 +1,9 @@
 ///////////////////////////////////////////////////////////////////////
 // polyText.txt                                                      //
 // author: Stephen Gannon, Kevin McAndrew, Conor Pesch, Aaron Naylor //
-// date: 28/11/19                                                    //
+// date: 29/11/19                                                    //
 // purpose: Contains an explanation of designed data type,           //
-//   	    specifications and pseudo-code for                       //
+//   	      specifications and pseudo-code for                       //
 //          all operations                                           //
 ///////////////////////////////////////////////////////////////////////
 
