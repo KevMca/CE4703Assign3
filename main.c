@@ -56,6 +56,12 @@ int main()
 	  polyPrintList(polyArray, polyArrayCounter);
 	  scanf("%d",&polyChoice1);
 	  polyDelete(polyArray[polyChoice1 - 1]);
+	  // Move all later polynomials back
+	  for(int i = polyChoice1; i <= polyArrayCounter; i++)
+	  {
+	  	polyArray[i - 1] = polyArray[i];
+	  }
+	  // Move array counter back
 	  polyArrayCounter -= 1;
 	  break;
 	  
