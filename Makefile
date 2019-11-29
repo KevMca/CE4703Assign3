@@ -40,3 +40,4 @@ clean: cleanObject
 # Rule for cleaning up the 3D shapes directory
 cleanObject:
 	rm -f object/*.o
+
