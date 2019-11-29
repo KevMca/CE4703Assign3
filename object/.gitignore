@@ -2,9 +2,4 @@
 *
 
 # Track these
-!*.c
-!*.h
-!Makefile
-!*.md
-!*.txt
 !.gitignore
